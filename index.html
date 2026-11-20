@@ -91,7 +91,6 @@
     body.light-theme #tab-beranda h3,
     body.light-theme #tab-kerjasama h2,
     body.light-theme #tab-kerjasama h3,
-    body.light-theme #tab-modul h3,
     body.light-theme #tab-evaluasi h2,
     body.light-theme #tab-evaluasi h3,
     body.light-theme #tab-sertifikat h2,
@@ -109,6 +108,26 @@
       background-color: #ffffff !important;
       border-color: #cbd5e1 !important;
       color: #0f172a !important;
+    }
+
+    /* Animasi Tepuk Tangan & Bintang saat Nilai 100 */
+    @keyframes clapPulse {
+      0%, 100% { transform: scale(1) rotate(0deg); }
+      25% { transform: scale(1.25) rotate(-12deg); }
+      75% { transform: scale(1.25) rotate(12deg); }
+    }
+    @keyframes starFloat {
+      0% { transform: translateY(14px) scale(0.5) rotate(0deg); opacity: 0; }
+      50% { transform: translateY(-6px) scale(1.2) rotate(18deg); opacity: 1; }
+      100% { transform: translateY(-20px) scale(0.9) rotate(-12deg); opacity: 0.9; }
+    }
+    .clap-anim {
+      display: inline-block;
+      animation: clapPulse 0.85s ease-in-out infinite;
+    }
+    .star-anim {
+      display: inline-block;
+      animation: starFloat 1.4s ease-in-out infinite;
     }
   </style>
 </head>
@@ -202,19 +221,16 @@
 
       <!-- Navigation Tabs -->
       <nav class="flex flex-wrap items-center gap-1.5 sm:gap-2" aria-label="Menu Utama">
-        <button data-tab="beranda" onclick="switchTab('beranda')" class="nav-btn rounded-xl px-3 py-2 text-xs sm:text-sm font-semibold transition bg-brand-electric text-white shadow-md shadow-blue-600/30">
+        <button data-tab="beranda" onclick="switchTab('beranda')" class="nav-btn rounded-xl px-3 py-2 text-xs sm:text-sm font-semibold transition bg-brand-electric text-white shadow-md shadow-blue-600/30" data-i18n="nav_home">
           Beranda
         </button>
-        <button data-tab="kerjasama" onclick="switchTab('kerjasama')" class="nav-btn rounded-xl px-3 py-2 text-xs sm:text-sm font-semibold text-slate-300 hover:bg-white/10 hover:text-white transition">
+        <button data-tab="kerjasama" onclick="switchTab('kerjasama')" class="nav-btn rounded-xl px-3 py-2 text-xs sm:text-sm font-semibold text-slate-300 hover:bg-white/10 hover:text-white transition" data-i18n="nav_mou">
           Surat Kerja Sama
         </button>
-        <button data-tab="modul" onclick="switchTab('modul')" class="nav-btn rounded-xl px-3 py-2 text-xs sm:text-sm font-semibold text-slate-300 hover:bg-white/10 hover:text-white transition">
-          Modul &amp; Prompt
+        <button data-tab="evaluasi" onclick="switchTab('evaluasi')" class="nav-btn rounded-xl px-3 py-2 text-xs sm:text-sm font-semibold text-slate-300 hover:bg-white/10 hover:text-white transition" data-i18n="nav_eval">
+          Evaluasi Pilihan Ganda
         </button>
-        <button data-tab="evaluasi" onclick="switchTab('evaluasi')" class="nav-btn rounded-xl px-3 py-2 text-xs sm:text-sm font-semibold text-slate-300 hover:bg-white/10 hover:text-white transition">
-          Evaluasi &amp; Tugas
-        </button>
-        <button data-tab="sertifikat" onclick="switchTab('sertifikat')" class="nav-btn rounded-xl px-3 py-2 text-xs sm:text-sm font-semibold text-slate-300 hover:bg-white/10 hover:text-white transition">
+        <button data-tab="sertifikat" onclick="switchTab('sertifikat')" class="nav-btn rounded-xl px-3 py-2 text-xs sm:text-sm font-semibold text-slate-300 hover:bg-white/10 hover:text-white transition" data-i18n="nav_cert">
           Sertifikat
         </button>
         <div class="ml-1 flex items-center gap-1.5 border-l border-white/15 pl-2">
@@ -242,23 +258,23 @@
         <div class="relative grid gap-8 lg:grid-cols-12 lg:items-center">
           <div class="space-y-5 lg:col-span-7">
             <div class="inline-flex flex-wrap items-center gap-2 rounded-full border border-brand-gold/40 bg-brand-gold/10 px-3.5 py-1.5 text-xs font-bold text-brand-gold">
-              <span>BERSAMA MEMBANGUN GENERASI DIGITAL INDONESIA</span>
+              <span data-i18n="hero_badge">BERSAMA MEMBANGUN GENERASI DIGITAL INDONESIA</span>
             </div>
 
             <h1 class="text-3xl font-black tracking-tight text-white sm:text-5xl leading-tight">
               GO TO <span class="bg-gradient-to-r from-brand-gold via-yellow-300 to-brand-amber bg-clip-text text-transparent">SCHOOL</span>
-              <span class="mt-2 block text-lg font-bold text-brand-cyan sm:text-2xl">
+              <span class="mt-2 block text-lg font-bold text-brand-cyan sm:text-2xl" data-i18n="hero_sub">
                 Edukasi Digital untuk Masa Depan yang Lebih Baik
               </span>
             </h1>
 
-            <p class="max-w-2xl text-sm sm:text-base text-slate-200 leading-relaxed">
+            <p class="max-w-2xl text-sm sm:text-base text-slate-200 leading-relaxed" data-i18n="hero_desc">
               Platform terpadu untuk kemitraan sekolah &amp; kampus bersama <strong>PT Web Digital Marketing</strong> dan <strong>Latifsafruddin AI</strong>. Ajukan surat kerja sama otomatis, akses modul praktik AI, kerjakan evaluasi, hingga terbitkan sertifikat digital terverifikasi.
             </p>
 
             <!-- Daftar Apa yang Kami Bawa -->
             <div class="rounded-2xl border border-white/10 bg-slate-950/60 p-4 backdrop-blur-sm">
-              <p class="mb-2.5 text-xs font-extrabold uppercase tracking-wider text-brand-gold">Apa yang Kami Bawa?</p>
+              <p class="mb-2.5 text-xs font-extrabold uppercase tracking-wider text-brand-gold" data-i18n="what_we_bring">Apa yang Kami Bawa?</p>
               <div class="grid gap-2 sm:grid-cols-2 text-xs sm:text-sm text-slate-200">
                 <div class="flex items-center gap-2">
                   <span class="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-brand-electric text-[11px] font-bold text-white">✓</span>
@@ -280,11 +296,11 @@
             </div>
 
             <div class="flex flex-wrap gap-3 pt-1">
-              <button onclick="switchTab('kerjasama')" class="rounded-2xl bg-gradient-to-r from-brand-gold to-brand-amber px-5 py-3 text-sm font-extrabold text-slate-950 shadow-lg shadow-amber-500/25 hover:brightness-105 transition">
+              <button onclick="switchTab('kerjasama')" class="rounded-2xl bg-gradient-to-r from-brand-gold to-brand-amber px-5 py-3 text-sm font-extrabold text-slate-950 shadow-lg shadow-amber-500/25 hover:brightness-105 transition" data-i18n="cta_mou">
                 Buat Surat Kerja Sama Sekolah
               </button>
-              <button onclick="switchTab('modul')" class="rounded-2xl border border-white/20 bg-white/10 px-5 py-3 text-sm font-bold text-white hover:bg-white/15 transition">
-                Masuk Kelas &amp; Modul Peserta
+              <button onclick="document.getElementById('pendaftaran-siswa-section').scrollIntoView({behavior: 'smooth'})" class="rounded-2xl border border-white/20 bg-white/10 px-5 py-3 text-sm font-bold text-white hover:bg-white/15 transition" data-i18n="cta_modules">
+                Daftar Peserta &amp; Evaluasi
               </button>
             </div>
           </div>
@@ -307,12 +323,10 @@
 
               <!-- Poster / Flyer Visual Card -->
               <div onclick="toggleFlyerModal(true)" class="group relative cursor-pointer overflow-hidden rounded-2xl border border-blue-400/30 bg-gradient-to-b from-[#061844] via-[#0B2D7A] to-[#040E29] shadow-inner">
-                <!-- Gambar unggahan pengguna jika diganti -->
                 <img id="flyer-custom-img" src="" alt="Flyer Go To School PT Web Digital Marketing & Latifsafruddin AI" class="hidden w-full h-auto object-cover" onerror="this.classList.add('hidden')" />
 
-                <!-- Tampilan Poster Utama Sesuai Desain Flyer -->
+                <!-- Tampilan Poster Utama -->
                 <div id="flyer-default-poster" class="p-4 sm:p-5 text-white space-y-3.5 select-none">
-                  <!-- Top Logos -->
                   <div class="flex items-center justify-between gap-2 border-b border-white/15 pb-2.5">
                     <div class="flex items-center gap-2">
                       <svg class="h-8 w-8 shrink-0" viewBox="0 0 120 110" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -341,7 +355,6 @@
                     </div>
                   </div>
 
-                  <!-- Main Headline Box -->
                   <div class="relative rounded-2xl border border-brand-cyan/40 bg-gradient-to-b from-blue-900/90 to-slate-950/90 p-3.5 text-center shadow-lg">
                     <span class="absolute -top-2.5 right-3 rounded-full bg-brand-gold px-2 py-0.5 text-[9px] font-black text-slate-950 shadow">
                       Generasi Digital
@@ -357,7 +370,6 @@
                     </div>
                   </div>
 
-                  <!-- Highlight Pemateri & Kelas -->
                   <div class="grid grid-cols-12 gap-2.5 items-center rounded-2xl bg-white/5 p-3 border border-white/10">
                     <div class="col-span-5 flex flex-col items-center justify-center rounded-xl bg-gradient-to-b from-brand-electric/30 to-slate-900 p-2.5 text-center border border-brand-cyan/20">
                       <div class="flex h-12 w-12 items-center justify-center rounded-full border-2 border-brand-gold bg-brand-navy text-sm font-black text-brand-gold">
@@ -377,7 +389,6 @@
                     </div>
                   </div>
 
-                  <!-- 5 Icons Strip -->
                   <div class="grid grid-cols-5 gap-1 text-center text-[8.5px] font-bold text-slate-200">
                     <div class="rounded-xl bg-blue-950/90 border border-brand-cyan/30 p-1.5">🌐<br/>Website</div>
                     <div class="rounded-xl bg-blue-950/90 border border-brand-cyan/30 p-1.5">🤖<br/>AI Otomasi</div>
@@ -386,7 +397,6 @@
                     <div class="rounded-xl bg-blue-950/90 border border-brand-cyan/30 p-1.5">💡<br/>Inovasi</div>
                   </div>
 
-                  <!-- Bottom Contact Bar -->
                   <div class="flex flex-wrap items-center justify-between gap-2 rounded-xl bg-brand-gold px-3 py-2 text-slate-950">
                     <div>
                       <p class="text-[8.5px] font-extrabold uppercase">Hubungi Kami Sekarang!</p>
@@ -466,1095 +476,677 @@
             <h3 class="mt-1 font-bold text-white">Generator Surat MoU</h3>
             <p class="mt-1.5 text-xs text-slate-400">Sekolah mengisi data instansi &amp; jadwal kunjungan, draf PKS otomatis terbit dan siap cetak.</p>
           </button>
-          <button onclick="switchTab('modul')" class="text-left rounded-2xl border border-white/10 bg-slate-950/80 p-5 hover:border-brand-cyan/60 transition">
-            <span class="text-xs font-extrabold text-brand-cyan">TAHAP 02 • PESERTA</span>
-            <h3 class="mt-1 font-bold text-white">Modul &amp; Bank Prompt</h3>
-            <p class="mt-1.5 text-xs text-slate-400">Siswa/mahasiswa mempelajari 4 modul inti, menyalin template prompt, dan mencatat progres.</p>
+          <button onclick="document.getElementById('pendaftaran-siswa-section').scrollIntoView({behavior: 'smooth'})" class="text-left rounded-2xl border border-white/10 bg-slate-950/80 p-5 hover:border-brand-cyan/60 transition">
+            <span class="text-xs font-extrabold text-brand-cyan">TAHAP 02 • REGISTRASI</span>
+            <h3 class="mt-1 font-bold text-white">Pendaftaran Data Siswa</h3>
+            <p class="mt-1.5 text-xs text-slate-400">Siswa mengisi Nama, No Absen, Kelas, Sekolah, HP, dan Medsos sebelum mengikuti evaluasi.</p>
           </button>
           <button onclick="switchTab('evaluasi')" class="text-left rounded-2xl border border-white/10 bg-slate-950/80 p-5 hover:border-brand-cyan/60 transition">
             <span class="text-xs font-extrabold text-brand-cyan">TAHAP 03 • ASESMEN</span>
-            <h3 class="mt-1 font-bold text-white">Evaluasi &amp; Tugas Karya</h3>
-            <p class="mt-1.5 text-xs text-slate-400">Uji pemahaman 5 soal studi kasus + unggah tautan tugas pasca-pelatihan sebagai syarat lulus.</p>
+            <h3 class="mt-1 font-bold text-white">Evaluasi 15 Pilihan Ganda</h3>
+            <p class="mt-1.5 text-xs text-slate-400">Kerjakan 15 soal pilihan ganda; nilai 100 memunculkan tepuk tangan &amp; bintang untuk membuka sertifikat.</p>
           </button>
           <button onclick="switchTab('sertifikat')" class="text-left rounded-2xl border border-white/10 bg-slate-950/80 p-5 hover:border-brand-gold/60 transition">
             <span class="text-xs font-extrabold text-brand-gold">TAHAP 04 • KELULUSAN</span>
-            <h3 class="mt-1 font-bold text-white">Sertifikat &amp; Verifikasi</h3>
-            <p class="mt-1.5 text-xs text-slate-400">Sertifikat bernomor registrasi unik terbit otomatis setelah kuis lulus &amp; tugas terkirim.</p>
+            <h3 class="mt-1 font-bold text-white">Sertifikat Online</h3>
+            <p class="mt-1.5 text-xs text-slate-400">Sertifikat online terbuka saat nilai 100 tercapai beserta tepuk tangan &amp; bintang.</p>
           </button>
         </div>
       </div>
 
-      <!-- 4 Kesaksian / Testimoni Dwi-Bahasa (ID & EN) -->
-      <div class="rounded-3xl border border-white/10 bg-slate-900/80 p-6 sm:p-8 space-y-6">
-        <div class="flex flex-wrap items-center justify-between gap-4 border-b border-white/10 pb-4">
+      <!-- Formulir Pendaftaran Siswa -->
+      <div id="pendaftaran-siswa-section" class="rounded-3xl border border-brand-cyan/30 bg-slate-900/90 p-6 sm:p-8 shadow-xl space-y-6">
+        <div class="flex flex-wrap items-center justify-between gap-3 border-b border-white/10 pb-4">
           <div>
-            <span id="testi-badge" class="text-xs font-extrabold uppercase tracking-wider text-brand-gold">Suara Peserta &amp; Mitra Sekolah</span>
-            <h2 id="testi-heading" class="mt-1 text-xl sm:text-2xl font-black text-white">4 Kesaksian Nyata Pelatihan Go To School</h2>
-            <p id="testi-subheading" class="text-xs sm:text-sm text-slate-400">Pengalaman siswa, mahasiswa, dan guru pendamping setelah mengikuti workshop bersama PT Web Digital Marketing &amp; Latifsafruddin AI.</p>
+            <span class="text-xs font-extrabold uppercase tracking-wider text-brand-gold">Registrasi Peserta Pelatihan</span>
+            <h2 class="text-xl sm:text-2xl font-black text-white">Pendaftaran Siswa Go To School</h2>
+            <p class="text-xs sm:text-sm text-slate-400 mt-0.5">
+              Lengkapi Nama Siswa, No Absen, Kelas, Sekolah, No HP, dan Medsos untuk mengikuti evaluasi dan mendapatkan e-Sertifikat.
+            </p>
           </div>
-          <div class="inline-flex rounded-2xl border border-white/15 bg-slate-950 p-1">
-            <button id="btn-lang-id" onclick="setLanguage('id')" class="rounded-xl bg-brand-electric px-3.5 py-1.5 text-xs font-extrabold text-white transition">
-              🇮🇩 Bahasa Indonesia
-            </button>
-            <button id="btn-lang-en" onclick="setLanguage('en')" class="rounded-xl px-3.5 py-1.5 text-xs font-bold text-slate-400 hover:text-white transition">
-              🇬🇧 English
-            </button>
-          </div>
+          <span id="student-count-badge" class="rounded-full bg-brand-electric/20 border border-brand-electric/40 px-3.5 py-1.5 text-xs font-bold text-brand-cyan">
+            0 Siswa Terdaftar
+          </span>
         </div>
 
-        <div id="testimonials-grid" class="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-          <!-- 4 Kartu Kesaksian dirender dinamis oleh JavaScript -->
+        <form id="student-reg-form" onsubmit="registerStudent(event)" class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          <div>
+            <label class="block text-xs font-semibold text-slate-300 mb-1">Nama Siswa *</label>
+            <input type="text" id="reg-nama" required placeholder="Contoh: Ahmad Rizky Pratama" class="w-full rounded-xl border border-white/15 bg-slate-950 px-3.5 py-2.5 text-sm text-white focus:border-brand-cyan focus:outline-none" />
+          </div>
+          <div>
+            <label class="block text-xs font-semibold text-slate-300 mb-1">No Absen *</label>
+            <input type="text" id="reg-absen" required placeholder="Contoh: 07" class="w-full rounded-xl border border-white/15 bg-slate-950 px-3.5 py-2.5 text-sm text-white focus:border-brand-cyan focus:outline-none" />
+          </div>
+          <div>
+            <label class="block text-xs font-semibold text-slate-300 mb-1">Kelas *</label>
+            <input type="text" id="reg-kelas" required placeholder="Contoh: XI RPL 2" class="w-full rounded-xl border border-white/15 bg-slate-950 px-3.5 py-2.5 text-sm text-white focus:border-brand-cyan focus:outline-none" />
+          </div>
+          <div>
+            <label class="block text-xs font-semibold text-slate-300 mb-1">Sekolah *</label>
+            <input type="text" id="reg-sekolah" required placeholder="Contoh: SMK Negeri 1 Surakarta" class="w-full rounded-xl border border-white/15 bg-slate-950 px-3.5 py-2.5 text-sm text-white focus:border-brand-cyan focus:outline-none" />
+          </div>
+          <div>
+            <label class="block text-xs font-semibold text-slate-300 mb-1">No HP / WhatsApp *</label>
+            <input type="tel" id="reg-hp" required placeholder="Contoh: 081234567890" class="w-full rounded-xl border border-white/15 bg-slate-950 px-3.5 py-2.5 text-sm text-white focus:border-brand-cyan focus:outline-none" />
+          </div>
+          <div>
+            <label class="block text-xs font-semibold text-slate-300 mb-1">Medsos (Instagram / TikTok) *</label>
+            <input type="text" id="reg-medsos" required placeholder="Contoh: @ahmadrizky.id" class="w-full rounded-xl border border-white/15 bg-slate-950 px-3.5 py-2.5 text-sm text-white focus:border-brand-cyan focus:outline-none" />
+          </div>
+          <div class="sm:col-span-2 lg:col-span-3 flex justify-end pt-1">
+            <button type="submit" class="w-full sm:w-auto rounded-xl bg-gradient-to-r from-brand-electric to-blue-500 px-6 py-3 text-sm font-extrabold text-white shadow-lg shadow-blue-600/30 hover:brightness-110 transition">
+              Daftar &amp; Lanjut ke Evaluasi
+            </button>
+          </div>
+        </form>
+
+        <!-- Daftar Siswa Terdaftar -->
+        <div id="registered-students-wrapper" class="hidden pt-2">
+          <p class="text-xs font-bold uppercase tracking-wider text-slate-400 mb-2.5">Daftar Peserta Terdaftar (Klik untuk pilih peserta aktif):</p>
+          <div id="registered-students-list" class="grid gap-2.5 sm:grid-cols-2 lg:grid-cols-3"></div>
         </div>
       </div>
     </section>
 
-    <!-- ==================== TAB 2: GENERATOR SURAT KERJA SAMA ==================== -->
+    <!-- ==================== TAB 2: SURAT KERJA SAMA (MoU) ==================== -->
     <section id="tab-kerjasama" class="tab-panel hidden space-y-6">
-      <div class="flex flex-wrap items-center justify-between gap-4">
+      <div class="flex flex-wrap items-center justify-between gap-3">
         <div>
-          <span class="text-xs font-bold uppercase tracking-wider text-brand-gold">Portal Kemitraan Sekolah &amp; Kampus</span>
-          <h2 class="text-2xl sm:text-3xl font-black text-white">Generator Surat Kerja Sama (MoU / PKS)</h2>
-          <p class="text-sm text-slate-400">Isi identitas sekolah/kampus di sebelah kiri untuk melihat pratinjau dokumen kerja sama secara langsung.</p>
+          <span class="text-xs font-extrabold uppercase tracking-wider text-brand-gold">Administrasi Kemitraan Sekolah</span>
+          <h2 class="text-2xl sm:text-3xl font-black text-white">Generator Draf Surat Kerja Sama (MoU)</h2>
+          <p class="text-sm text-slate-400">Isi data sekolah/kampus di sebelah kiri, pratinjau surat resmi langsung terbarui dan siap dicetak.</p>
         </div>
         <div class="flex flex-wrap gap-2">
-          <button onclick="copyMoUText()" class="rounded-xl border border-white/15 bg-slate-800 px-4 py-2.5 text-xs sm:text-sm font-bold text-white hover:bg-slate-700 transition">
+          <button onclick="copyMouText()" class="rounded-xl border border-white/15 bg-slate-900 px-4 py-2 text-xs sm:text-sm font-bold text-brand-cyan hover:bg-slate-800 transition">
             Salin Teks Surat
           </button>
-          <button onclick="printSection('mou-document')" class="rounded-xl bg-gradient-to-r from-brand-gold to-brand-amber px-4 py-2.5 text-xs sm:text-sm font-extrabold text-slate-950 shadow-lg hover:brightness-105 transition">
+          <button onclick="printElement('mou-print-doc')" class="rounded-xl bg-brand-gold px-4 py-2 text-xs sm:text-sm font-extrabold text-slate-950 hover:brightness-105 transition">
             Cetak / Simpan PDF
           </button>
         </div>
       </div>
 
-      <!-- Pilihan Jenis Surat Resmi -->
-      <div class="flex flex-wrap gap-2">
-        <button id="btn-doc-penawaran" onclick="switchLetterType('penawaran')" class="rounded-xl bg-brand-electric px-4 py-2 text-xs sm:text-sm font-bold text-white shadow transition">
-          1. Surat Penawaran Kerja Sama &amp; Lembar Minat
-        </button>
-        <button id="btn-doc-kerjasama" onclick="switchLetterType('kerjasama')" class="rounded-xl border border-white/15 bg-slate-900 px-4 py-2 text-xs sm:text-sm font-bold text-slate-300 hover:text-white transition">
-          2. Surat Kerja Sama (No. 010/SK-PTWDM)
+      <div class="grid gap-6 lg:grid-cols-12">
+        <!-- Form Input MoU -->
+        <div class="lg:col-span-5 rounded-3xl border border-white/10 bg-slate-900/90 p-6 space-y-4 h-fit">
+          <h3 class="font-bold text-white border-b border-white/10 pb-2.5">Data Pihak Sekolah / Kampus</h3>
+          <div>
+            <label class="block text-xs font-semibold text-slate-300 mb-1">Nomor Surat Kerja Sama</label>
+            <input id="mou-nomor" type="text" value="014/GTS-WDM/XI/2026" oninput="updateMouPreview()" class="w-full rounded-xl border border-white/15 bg-slate-950 px-3 py-2 text-sm text-white" />
+          </div>
+          <div>
+            <label class="block text-xs font-semibold text-slate-300 mb-1">Nama Sekolah / Perguruan Tinggi</label>
+            <input id="mou-sekolah" type="text" value="SMK Negeri 1 Surakarta" oninput="updateMouPreview()" class="w-full rounded-xl border border-white/15 bg-slate-950 px-3 py-2 text-sm text-white" />
+          </div>
+          <div>
+            <label class="block text-xs font-semibold text-slate-300 mb-1">Nama Kepala Sekolah / Pimpinan</label>
+            <input id="mou-kepsek" type="text" value="Drs. Hendra Wijaya, M.Pd." oninput="updateMouPreview()" class="w-full rounded-xl border border-white/15 bg-slate-950 px-3 py-2 text-sm text-white" />
+          </div>
+          <div>
+            <label class="block text-xs font-semibold text-slate-300 mb-1">Jabatan Penandatangan</label>
+            <input id="mou-jabatan" type="text" value="Kepala Sekolah" oninput="updateMouPreview()" class="w-full rounded-xl border border-white/15 bg-slate-950 px-3 py-2 text-sm text-white" />
+          </div>
+          <div>
+            <label class="block text-xs font-semibold text-slate-300 mb-1">Alamat Lengkap Sekolah</label>
+            <input id="mou-alamat" type="text" value="Jl. Sungai Kapuas No. 28, Kedung Lumbu, Surakarta" oninput="updateMouPreview()" class="w-full rounded-xl border border-white/15 bg-slate-950 px-3 py-2 text-sm text-white" />
+          </div>
+          <div class="grid grid-cols-2 gap-3">
+            <div>
+              <label class="block text-xs font-semibold text-slate-300 mb-1">Tanggal Pelaksanaan</label>
+              <input id="mou-tanggal" type="date" value="2026-11-28" oninput="updateMouPreview()" class="w-full rounded-xl border border-white/15 bg-slate-950 px-3 py-2 text-sm text-white" />
+            </div>
+            <div>
+              <label class="block text-xs font-semibold text-slate-300 mb-1">Estimasi Peserta</label>
+              <input id="mou-peserta" type="text" value="150 Siswa" oninput="updateMouPreview()" class="w-full rounded-xl border border-white/15 bg-slate-950 px-3 py-2 text-sm text-white" />
+            </div>
+          </div>
+          <div>
+            <label class="block text-xs font-semibold text-slate-300 mb-1">Fokus Materi Workshop</label>
+            <select id="mou-fokus" onchange="updateMouPreview()" class="w-full rounded-xl border border-white/15 bg-slate-950 px-3 py-2 text-sm text-white">
+              <option value="Pelatihan AI & ChatGPT, Pembuatan Website, serta Digital Marketing">Paket Lengkap: AI, Website &amp; Digital Marketing</option>
+              <option value="Pemanfaatan AI Generatif & Prompt Engineering untuk Pembelajaran">Fokus AI Generatif &amp; Prompt Engineering</option>
+              <option value="Bootcamp Pembuatan Website & Kewirausahaan Digital Siswa">Bootcamp Website &amp; Technopreneurship</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Preview Dokumen Resmi -->
+        <div class="lg:col-span-7">
+          <div id="mou-print-doc" class="rounded-3xl bg-white p-6 sm:p-10 text-slate-900 shadow-2xl space-y-5 text-sm leading-relaxed">
+            <!-- Kop Surat -->
+            <div class="flex flex-wrap items-center justify-between gap-4 border-b-4 border-double border-slate-900 pb-4">
+              <div>
+                <p class="text-base sm:text-lg font-black tracking-tight text-blue-950">PT WEB DIGITAL MARKETING</p>
+                <p class="text-xs font-bold text-blue-700">&amp; LATIFSAFRUDDIN AI — PROGRAM GO TO SCHOOL</p>
+                <p class="text-[11px] text-slate-600 mt-0.5">Website: ptwebdigitalmarketing.my.id | latifsafruddin.online | WA: 0855 1236 277</p>
+              </div>
+              <div class="rounded-xl bg-blue-950 px-3 py-1.5 text-right text-white">
+                <p class="text-[10px] font-bold text-amber-400">DOKUMEN KEMITRAAN</p>
+                <p class="text-xs font-extrabold">PERJANJIAN KERJA SAMA</p>
+              </div>
+            </div>
+
+            <div class="text-center space-y-1">
+              <h4 class="text-base font-extrabold uppercase underline">SURAT PERJANJIAN KERJA SAMA (MoU)</h4>
+              <p class="text-xs font-semibold text-slate-600">Nomor: <span id="prev-mou-nomor">014/GTS-WDM/XI/2026</span></p>
+            </div>
+
+            <p>
+              Pada hari ini, bertempat di <strong id="prev-mou-sekolah-inline">SMK Negeri 1 Surakarta</strong>, kami yang bertanda tangan di bawah ini:
+            </p>
+
+            <div class="space-y-2 rounded-xl bg-slate-50 p-4 border border-slate-200 text-xs sm:text-sm">
+              <p><strong>1. PIHAK PERTAMA:</strong> <strong>Latif Safruddin</strong>, selaku Founder &amp; Lead Trainer mewakili <strong>PT Web Digital Marketing &amp; Latifsafruddin AI</strong>, selanjutnya disebut sebagai <em>Penyelenggara Edukasi Digital</em>.</p>
+              <p><strong>2. PIHAK KEDUA:</strong> <strong id="prev-mou-kepsek">Drs. Hendra Wijaya, M.Pd.</strong>, selaku <span id="prev-mou-jabatan">Kepala Sekolah</span> mewakili <strong id="prev-mou-sekolah">SMK Negeri 1 Surakarta</strong>, beralamat di <span id="prev-mou-alamat">Jl. Sungai Kapuas No. 28, Kedung Lumbu, Surakarta</span>, selanjutnya disebut sebagai <em>Mitra Institusi Pendidikan</em>.</p>
+            </div>
+
+            <p>
+              Kedua belah pihak sepakat menjalin kerja sama pelaksanaan program <strong>“Go To School: Edukasi Digital untuk Masa Depan yang Lebih Baik”</strong> dengan ketentuan sebagai berikut:
+            </p>
+
+            <ul class="list-disc pl-5 space-y-1.5 text-xs sm:text-sm">
+              <li><strong>Ruang Lingkup Materi:</strong> <span id="prev-mou-fokus">Pelatihan AI &amp; ChatGPT, Pembuatan Website, serta Digital Marketing</span>.</li>
+              <li><strong>Jadwal &amp; Sasaran Peserta:</strong> Dilaksanakan pada tanggal <strong id="prev-mou-tanggal">28 November 2026</strong> dengan target peserta sebanyak <strong id="prev-mou-peserta">150 Siswa</strong>.</li>
+              <li><strong>Fasilitas &amp; Luaran:</strong> Peserta mendapatkan sesi pelatihan langsung bersama praktisi AI &amp; Digital Marketing, evaluasi daring, serta e-Sertifikat resmi terverifikasi bagi peserta yang lulus evaluasi.</li>
+            </ul>
+
+            <div class="grid grid-cols-2 gap-6 pt-6 text-center text-xs sm:text-sm">
+              <div>
+                <p class="font-bold">PIHAK PERTAMA</p>
+                <p class="text-slate-600">PT Web Digital Marketing &amp; Latifsafruddin AI</p>
+                <div class="h-16 flex items-center justify-center">
+                  <span class="rounded border border-blue-800/40 bg-blue-50 px-2.5 py-1 text-[10px] font-extrabold text-blue-900">TERVERIFIKASI DIGITAL</span>
+                </div>
+                <p class="font-extrabold underline">Latif Safruddin</p>
+                <p class="text-xs text-slate-500">Founder &amp; Pemateri Utama</p>
+              </div>
+              <div>
+                <p class="font-bold">PIHAK KEDUA</p>
+                <p class="text-slate-600" id="prev-mou-sekolah-ttd">SMK Negeri 1 Surakarta</p>
+                <div class="h-16"></div>
+                <p class="font-extrabold underline" id="prev-mou-kepsek-ttd">Drs. Hendra Wijaya, M.Pd.</p>
+                <p class="text-xs text-slate-500" id="prev-mou-jabatan-ttd">Kepala Sekolah</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== TAB 3: EVALUASI PILIHAN GANDA ==================== -->
+    <section id="tab-evaluasi" class="tab-panel hidden space-y-6">
+      <div class="flex flex-wrap items-center justify-between gap-3">
+        <div>
+          <span class="text-xs font-extrabold uppercase tracking-wider text-brand-gold">Asesmen Kompetensi Peserta</span>
+          <h2 class="text-2xl sm:text-3xl font-black text-white">Evaluasi Pilihan Ganda (15 Soal • Wajib Nilai 100)</h2>
+          <p class="text-sm text-slate-400">Jawab seluruh 15 soal pilihan ganda dengan benar untuk meraih skor <strong>100</strong>, mendapatkan tepuk tangan &amp; bintang, serta membuka sertifikat online.</p>
+        </div>
+        <div class="rounded-2xl border border-white/10 bg-slate-900 px-4 py-2.5">
+          <p class="text-[11px] text-slate-400">Skor Tertinggi Anda</p>
+          <p id="eval-best-score" class="text-base font-black text-brand-cyan">Belum Ada Nilai</p>
+        </div>
+      </div>
+
+      <!-- Identitas Peserta yang Mengerjakan -->
+      <div class="rounded-3xl border border-white/10 bg-slate-900/90 p-5 sm:p-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        <div>
+          <label class="block text-xs font-semibold text-slate-300 mb-1">Nama Siswa (untuk Sertifikat) *</label>
+          <input id="eval-nama" type="text" placeholder="Masukkan nama lengkap siswa" class="w-full rounded-xl border border-white/15 bg-slate-950 px-3.5 py-2 text-sm text-white" />
+        </div>
+        <div>
+          <label class="block text-xs font-semibold text-slate-300 mb-1">No Absen &amp; Kelas *</label>
+          <input id="eval-kelas-absen" type="text" placeholder="Contoh: Absen 07 - XI RPL 2" class="w-full rounded-xl border border-white/15 bg-slate-950 px-3.5 py-2 text-sm text-white" />
+        </div>
+        <div>
+          <label class="block text-xs font-semibold text-slate-300 mb-1">Asal Sekolah *</label>
+          <input id="eval-sekolah" type="text" placeholder="Contoh: SMK Negeri 1 Surakarta" class="w-full rounded-xl border border-white/15 bg-slate-950 px-3.5 py-2 text-sm text-white" />
+        </div>
+      </div>
+
+      <!-- Banner Hasil & Perayaan Nilai 100 -->
+      <div id="eval-result-banner" class="hidden rounded-3xl border-2 p-6 text-center space-y-3 transition-all"></div>
+
+      <!-- Daftar 15 Soal Pilihan Ganda -->
+      <form id="quiz-form" onsubmit="submitEvaluation(event)" class="space-y-4">
+        <div id="quiz-questions-container" class="space-y-4"></div>
+
+        <div class="flex flex-wrap items-center justify-between gap-3 pt-2">
+          <button type="button" onclick="resetQuiz()" class="rounded-2xl border border-white/15 bg-slate-900 px-5 py-3 text-sm font-bold text-slate-300 hover:bg-slate-800 transition">
+            Reset Jawaban
+          </button>
+          <button type="submit" class="rounded-2xl bg-gradient-to-r from-brand-gold to-brand-amber px-7 py-3 text-sm font-black text-slate-950 shadow-lg shadow-amber-500/25 hover:brightness-105 transition">
+            Kirim &amp; Hitung Nilai Evaluasi
+          </button>
+        </div>
+      </form>
+    </section>
+
+    <!-- ==================== TAB 4: SERTIFIKAT ==================== -->
+    <section id="tab-sertifikat" class="tab-panel hidden space-y-6">
+      <div class="flex flex-wrap items-center justify-between gap-3">
+        <div>
+          <span class="text-xs font-extrabold uppercase tracking-wider text-brand-gold">Kelulusan &amp; Verifikasi</span>
+          <h2 class="text-2xl sm:text-3xl font-black text-white">e-Sertifikat Online Go To School</h2>
+          <p class="text-sm text-slate-400">Sertifikat online hanya dapat diakses setelah peserta meraih nilai evaluasi sempurna <strong>100</strong>.</p>
+        </div>
+        <button id="btn-print-cert" onclick="printElement('print-area')" disabled class="rounded-2xl bg-brand-gold px-5 py-2.5 text-sm font-extrabold text-slate-950 disabled:opacity-40 disabled:cursor-not-allowed hover:brightness-105 transition">
+          Cetak / Unduh PDF Sertifikat
         </button>
       </div>
 
-      <div class="grid gap-6 lg:grid-cols-12">
-        <!-- Form Input Sekolah -->
-        <div class="lg:col-span-5 space-y-4 rounded-3xl border border-white/10 bg-slate-900 p-6">
-          <h3 class="font-bold text-white border-b border-white/10 pb-3">Data Instansi Pendidikan</h3>
+      <!-- Status Terkunci Jika Belum Nilai 100 -->
+      <div id="cert-locked-state" class="rounded-3xl border border-amber-400/30 bg-slate-900/90 p-8 text-center space-y-4">
+        <div class="mx-auto flex h-16 w-16 items-center justify-center rounded-2xl bg-amber-500/15 text-3xl">🔒</div>
+        <h3 class="text-xl font-extrabold text-white">Akses Sertifikat Online Terkunci</h3>
+        <p class="mx-auto max-w-lg text-sm text-slate-300">
+          Untuk mengakses Sertifikat Online <strong>PT Web Digital Marketing &amp; Latifsafruddin AI</strong>, Anda wajib meraih <strong>Nilai 100</strong> pada 15 soal pilihan ganda di menu Evaluasi.
+        </p>
+        <button onclick="switchTab('evaluasi')" class="rounded-2xl bg-brand-electric px-6 py-3 text-sm font-bold text-white hover:bg-blue-500 transition">
+          Kerjakan 15 Soal Evaluasi Sekarang
+        </button>
+      </div>
 
-          <div class="space-y-3 text-sm">
-            <div>
-              <label class="block text-xs font-semibold text-slate-300 mb-1">Nomor Surat Mitra</label>
-              <input id="mou-nomor" type="text" value="010/SK-PTWDM/XI/2026" oninput="updateMoU()" class="w-full rounded-xl border border-white/15 bg-slate-950 px-3.5 py-2.5 text-white focus:border-brand-cyan focus:outline-none" />
-            </div>
-
-            <div>
-              <label class="block text-xs font-semibold text-slate-300 mb-1">Nama Sekolah / Kampus</label>
-              <input id="mou-sekolah" type="text" value="SMK Negeri 1 Nusantara" oninput="updateMoU()" class="w-full rounded-xl border border-white/15 bg-slate-950 px-3.5 py-2.5 text-white focus:border-brand-cyan focus:outline-none" />
-            </div>
-
-            <div>
-              <label class="block text-xs font-semibold text-slate-300 mb-1">Alamat Lengkap Sekolah</label>
-              <input id="mou-alamat" type="text" value="Jl. Pendidikan No. 45, Sleman, Yogyakarta" oninput="updateMoU()" class="w-full rounded-xl border border-white/15 bg-slate-950 px-3.5 py-2.5 text-white focus:border-brand-cyan focus:outline-none" />
-            </div>
-
-            <div class="grid gap-3 sm:grid-cols-2">
-              <div>
-                <label class="block text-xs font-semibold text-slate-300 mb-1">Nama Kepala Sekolah / Pimpinan</label>
-                <input id="mou-kepsek" type="text" value="Drs. Ahmad Hidayat, M.Pd." oninput="updateMoU()" class="w-full rounded-xl border border-white/15 bg-slate-950 px-3.5 py-2.5 text-white focus:border-brand-cyan focus:outline-none" />
-              </div>
-              <div>
-                <label class="block text-xs font-semibold text-slate-300 mb-1">NIP / Jabatan</label>
-                <input id="mou-jabatan" type="text" value="NIP. 19780412 200501 1 004" oninput="updateMoU()" class="w-full rounded-xl border border-white/15 bg-slate-950 px-3.5 py-2.5 text-white focus:border-brand-cyan focus:outline-none" />
-              </div>
-            </div>
-
-            <div class="grid gap-3 sm:grid-cols-2">
-              <div>
-                <label class="block text-xs font-semibold text-slate-300 mb-1">Tanggal Surat / Pelaksanaan</label>
-                <input id="mou-tanggal" type="text" value="Sleman, 20 November 2026" oninput="updateMoU()" class="w-full rounded-xl border border-white/15 bg-slate-950 px-3.5 py-2.5 text-white focus:border-brand-cyan focus:outline-none" />
-              </div>
-              <div>
-                <label class="block text-xs font-semibold text-slate-300 mb-1">Estimasi Peserta</label>
-                <input id="mou-peserta" type="text" value="150 Siswa & Guru Pendamping" oninput="updateMoU()" class="w-full rounded-xl border border-white/15 bg-slate-950 px-3.5 py-2.5 text-white focus:border-brand-cyan focus:outline-none" />
-              </div>
-            </div>
-
-            <div>
-              <label class="block text-xs font-semibold text-slate-300 mb-1">Fokus Ruang Lingkup Kerja Sama</label>
-              <select id="mou-paket" onchange="updateMoU()" class="w-full rounded-xl border border-white/15 bg-slate-950 px-3.5 py-2.5 text-white focus:border-brand-cyan focus:outline-none">
-                <option value="Pelatihan AI & ChatGPT, Pembuatan Website Sekolah, dan Workshop Digital Marketing">Paket Lengkap (AI, Website &amp; Digital Marketing)</option>
-                <option value="Pelatihan Generasi Cerdas Menguasai AI & ChatGPT (20% Teori, 80% Praktik)">Modul Generasi Cerdas Menguasai AI &amp; ChatGPT</option>
-                <option value="Pembuatan Website Sekolah, Digitalisasi Layanan & Inovasi Teknologi">Digitalisasi Sekolah &amp; Website Resmi</option>
-              </select>
-            </div>
-          </div>
-
-          <button onclick="submitPartnershipRequest()" class="w-full rounded-xl bg-brand-electric py-3 text-sm font-bold text-white hover:bg-blue-500 transition">
-            Ajukan Jadwal Kunjungan ke Tim W3 &amp; Latifsafruddin AI
-          </button>
+      <!-- Area Sertifikat Terbuka (Nilai 100) -->
+      <div id="cert-unlocked-state" class="hidden space-y-6">
+        <!-- Ucapan Perayaan Tepuk Tangan & Bintang -->
+        <div class="rounded-2xl border border-brand-gold/50 bg-gradient-to-r from-blue-950 via-indigo-950 to-slate-900 p-4 text-center">
+          <p class="text-base sm:text-lg font-black text-brand-gold">
+            <span class="clap-anim">👏</span> <span class="star-anim">⭐</span> SELAMAT! NILAI ANDA 100 — SERTIFIKAT ONLINE TERBUKA <span class="star-anim">⭐</span> <span class="clap-anim">👏</span>
+          </p>
         </div>
 
-        <!-- Live Preview Surat Kerja Sama Resmi -->
-        <div class="lg:col-span-7">
-          <div id="mou-document" class="rounded-3xl bg-white p-6 sm:p-10 text-slate-900 shadow-2xl space-y-5 text-xs sm:text-sm leading-relaxed">
-            <!-- Kop Surat Resmi PT Web Digital Marketing -->
-            <div class="flex flex-wrap items-center justify-between gap-4 border-b-4 border-double border-blue-950 pb-4">
-              <div class="flex items-center gap-3">
-                <svg class="h-12 w-12 shrink-0" viewBox="0 0 120 110" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <rect x="44" y="18" width="5" height="5" rx="1" fill="#0284C7"/>
-                  <rect x="52" y="12" width="6" height="6" rx="1" fill="#1D4ED8"/>
-                  <path d="M62 24H82C102 24 114 40 114 60C114 80 100 94 82 94H74C88 86 96 74 96 60C96 45 86 35 72 35H58L62 24Z" fill="#94A3B8"/>
-                  <path d="M12 25H26L38 66L50 38H61L71 66L82 38H94L76 92H64L55 66L44 92H32L12 25Z" fill="#1E3A8A"/>
-                  <path d="M67 48H89L79 62C87 63 92 69 90 78C88 87 79 92 67 92H59L62 82H68C74 82 78 79 79 75C80 71 76 68 70 68H66L67 48Z" fill="#0284C7"/>
-                </svg>
-                <div>
-                  <p class="text-base sm:text-lg font-black tracking-tight text-blue-950">PT WEB DIGITAL MARKETING</p>
-                  <p class="text-xs font-bold text-blue-700">SOLUSI DIGITAL TERINTEGRASI • Website • AI • Aplikasi • Media Digital • Inovasi</p>
-                  <p class="text-[11px] font-semibold text-slate-700">Badan Hukum Nomor: AHU-013070.AHA.01.30 Tahun 2023</p>
-                  <p class="text-[11px] text-slate-600">Jl. Kaliurang KM 10 Sleman, Yogyakarta | WA: 0855 1236 277 | <a href="https://ptwebdigitalmarketing.my.id/" target="_blank" rel="noopener noreferrer" class="underline text-blue-800">www.ptwebdigitalmarketing.my.id</a></p>
-                </div>
+        <!-- Dokumen Sertifikat Siap Cetak -->
+        <div id="print-area" class="mx-auto max-w-4xl rounded-3xl border-8 border-double border-amber-500 bg-white p-6 sm:p-12 text-slate-900 shadow-2xl relative overflow-hidden">
+          <div class="border-2 border-blue-900/20 rounded-2xl p-6 sm:p-10 text-center space-y-5 relative">
+            <!-- Header Logo Sertifikat -->
+            <div class="flex flex-wrap items-center justify-between gap-4 border-b border-slate-200 pb-4">
+              <div class="text-left">
+                <p class="text-sm font-black text-blue-950">PT WEB DIGITAL MARKETING</p>
+                <p class="text-[11px] font-bold text-blue-700">&amp; LATIFSAFRUDDIN AI</p>
+              </div>
+              <div class="rounded-full bg-amber-400 px-3.5 py-1 text-[11px] font-black text-slate-950">
+                PREDIKAT: SANGAT MEMUASKAN (NILAI 100)
+              </div>
+              <div class="text-right text-[11px] font-mono text-slate-600">
+                <p>ID Sertifikat:</p>
+                <p id="cert-serial" class="font-bold text-slate-900">GTS-2026-88419</p>
+              </div>
+            </div>
+
+            <div class="space-y-1 pt-2">
+              <p class="text-xs font-extrabold uppercase tracking-[0.25em] text-blue-800">SERTIFIKAT KELULUSAN</p>
+              <h3 class="text-2xl sm:text-4xl font-black tracking-tight text-slate-900">GO TO SCHOOL DIGITAL ACADEMY</h3>
+              <p class="text-xs sm:text-sm text-slate-600">Diberikan dengan bangga kepada:</p>
+            </div>
+
+            <div class="py-2">
+              <p id="cert-student-name" class="text-2xl sm:text-4xl font-black text-blue-950 underline decoration-amber-400 decoration-4 underline-offset-8">
+                Nama Peserta
+              </p>
+              <p id="cert-student-class" class="mt-3 text-xs sm:text-sm font-semibold text-blue-800">
+                No Absen &amp; Kelas
+              </p>
+              <p id="cert-student-school" class="mt-1 text-sm sm:text-base font-bold text-slate-700">
+                Asal Sekolah
+              </p>
+            </div>
+
+            <p class="mx-auto max-w-2xl text-xs sm:text-sm text-slate-600 leading-relaxed">
+              Telah berhasil menyelesaikan program pelatihan digital serta lulus uji kompetensi 15 soal evaluasi dengan nilai sempurna <strong>100/100</strong> pada kegiatan <strong>“Go To School: Edukasi Digital untuk Masa Depan yang Lebih Baik”</strong>.
+            </p>
+
+            <div class="grid grid-cols-2 gap-6 pt-6 items-end text-xs sm:text-sm">
+              <div class="text-left">
+                <p class="text-slate-500">Tanggal Penerbitan:</p>
+                <p id="cert-issue-date" class="font-bold text-slate-900">20 November 2026</p>
+                <p class="mt-2 text-[11px] text-slate-500">Verifikasi Resmi: <span class="font-semibold text-blue-800">latifsafruddin.online</span></p>
               </div>
               <div class="text-right">
-                <span class="inline-block rounded-lg bg-blue-950 px-3 py-1 text-[10px] font-extrabold text-amber-400">LATIFSAFRUDDIN AI</span>
-                <p class="text-[10px] font-bold text-slate-600 mt-1"><a href="http://www.latifsafruddin.online/" target="_blank" rel="noopener noreferrer" class="underline hover:text-blue-800">latifsafruddin.online</a></p>
-                <p class="text-[10px] font-bold text-blue-700"><a href="https://latifsafruddinia.web.id/" target="_blank" rel="noopener noreferrer" class="underline">latifsafruddinia.web.id</a></p>
-              </div>
-            </div>
-
-            <!-- DOKUMEN 1: SURAT PENAWARAN KERJA SAMA & LEMBAR MINAT -->
-            <div id="letter-penawaran" class="space-y-4">
-              <div class="flex flex-wrap justify-between gap-2 text-xs">
-                <div>
-                  <p>Nomor : <strong id="prev-nomor">010/SK-PTWDM/XI/2026</strong></p>
-                  <p>Lampiran : <strong>1 (satu) berkas - Profil Program &amp; Modul</strong></p>
-                  <p>Perihal : <strong>Penawaran Kerja Sama Program LATIFSAFRUDDIN AI GO TO SCHOOL</strong></p>
+                <p class="font-bold text-slate-900">Lead Trainer &amp; Founder</p>
+                <div class="my-2 inline-block rounded border border-blue-900/30 bg-blue-50 px-3 py-1 text-[10px] font-extrabold text-blue-950">
+                  SIGNED DIGITALLY • WDM &amp; LS AI
                 </div>
-                <p class="font-semibold" id="prev-tanggal">Sleman, 20 November 2026</p>
+                <p class="font-black underline text-slate-900">Latif Safruddin</p>
+                <p class="text-xs text-slate-600">PT Web Digital Marketing &amp; Latifsafruddin AI</p>
               </div>
-
-              <div class="rounded-xl bg-slate-50 p-3.5 border border-slate-200">
-                <p>Kepada Yth.</p>
-                <p><strong>Kepala SMK/SMA/MA/SMU / Pimpinan <span id="prev-sekolah">SMK Negeri 1 Nusantara</span></strong></p>
-                <p>Alamat: <span id="prev-alamat">Jl. Pendidikan No. 45, Sleman, Yogyakarta</span></p>
-                <p>di Tempat</p>
-              </div>
-
-              <p class="italic">Assalamu'alaikum warahmatullahi wabarakatuh.</p>
-              <p>
-                Dengan hormat, dalam rangka mendukung peningkatan literasi digital dan kesiapan generasi muda menghadapi perkembangan teknologi, khususnya kecerdasan buatan (Artificial Intelligence/AI), <strong>PT Web Digital Marketing</strong> bermaksud menawarkan kerja sama pendidikan melalui program <strong>"LATIFSAFRUDDIN AI GO TO SCHOOL"</strong> kepada sekolah yang Bapak/Ibu pimpin.
-              </p>
-
-              <div class="space-y-2">
-                <p class="font-bold text-blue-950">A. TUJUAN PROGRAM</p>
-                <p>Program ini bertujuan memberikan wawasan dan keterampilan praktis kepada peserta didik serta pendidik agar mampu memanfaatkan AI dan teknologi digital secara cerdas, kreatif, kritis, aman, dan bertanggung jawab (target: <strong id="prev-peserta">150 Siswa &amp; Guru Pendamping</strong>).</p>
-
-                <p class="font-bold text-blue-950 pt-1">B. BENTUK KEGIATAN (<span id="prev-paket" class="text-blue-800">Pelatihan AI &amp; ChatGPT, Pembuatan Website Sekolah, dan Workshop Digital Marketing</span>)</p>
-                <ol class="list-decimal pl-5 space-y-1">
-                  <li>Seminar dan pengenalan AI, ChatGPT, serta perkembangan teknologi digital.</li>
-                  <li>Pelatihan praktik menyusun prompt dan menggunakan AI untuk mendukung proses belajar, riset awal, dan kreativitas.</li>
-                  <li>Literasi digital: verifikasi informasi, etika, privasi, keamanan, dan tanggung jawab penggunaan AI.</li>
-                  <li>Workshop pembuatan konten kreatif, website sederhana, dan pengenalan digital marketing.</li>
-                  <li>Pendampingan proyek atau karya digital peserta didik sesuai kebutuhan dan kesepakatan sekolah.</li>
-                </ol>
-
-                <p class="font-bold text-blue-950 pt-1">C. SKEMA PELAKSANAAN KERJA SAMA</p>
-                <ol class="list-decimal pl-5 space-y-1">
-                  <li>Sekolah menunjuk narahubung serta mengoordinasikan peserta, tempat, jadwal, dan fasilitas kegiatan.</li>
-                  <li>PT Web Digital Marketing menyiapkan narasumber/fasilitator, materi modul, dan metode pelatihan sesuai ruang lingkup yang disepakati.</li>
-                  <li>Tema, durasi, jumlah peserta, kebutuhan perangkat/internet, dokumentasi, sertifikat, serta teknis dibicarakan bersama sebelum kegiatan.</li>
-                  <li>Pelaksanaan kegiatan memperhatikan kebijakan sekolah, perlindungan data pribadi, keamanan peserta didik, dan pendampingan guru.</li>
-                </ol>
-
-                <p class="font-bold text-blue-950 pt-1">D. PRINSIP KERJA SAMA</p>
-                <p>Kerja sama ini dilaksanakan berdasarkan asas kemitraan, saling mendukung, transparansi, dan kesepakatan bersama. <strong>AI diposisikan sebagai alat bantu pembelajaran, bukan pengganti guru, proses berpikir, kejujuran akademik, maupun tanggung jawab peserta didik.</strong></p>
-              </div>
-
-              <p class="italic">Wassalamu'alaikum warahmatullahi wabarakatuh.</p>
-
-              <!-- Tanda Tangan -->
-              <div class="grid grid-cols-2 gap-6 pt-4 text-center">
-                <div>
-                  <p class="font-semibold">Pihak Sekolah,</p>
-                  <p class="text-xs text-slate-600">Kepala Sekolah</p>
-                  <div class="h-16"></div>
-                  <p class="font-bold underline" id="prev-kepsek-ttd">Drs. Ahmad Hidayat, M.Pd.</p>
-                  <p class="text-[11px] text-slate-600" id="prev-jabatan-ttd">NIP. 19780412 200501 1 004</p>
-                </div>
-                <div>
-                  <p class="font-semibold">PT Web Digital Marketing,</p>
-                  <p class="text-xs text-slate-600">Direktur / Founder Latifsafruddin AI</p>
-                  <div class="h-16 flex items-center justify-center">
-                    <span class="rounded-full border-2 border-blue-900 px-3 py-1 text-[10px] font-black text-blue-900 uppercase">STEMPEL RESMI • PTWDM YOGYAKARTA</span>
-                  </div>
-                  <p class="font-bold underline">LATIF SAFRUDDIN</p>
-                </div>
-              </div>
-
-              <!-- Lembar Pernyataan Minat / Persetujuan Awal -->
-              <div class="mt-4 rounded-xl border-2 border-dashed border-slate-400 bg-slate-50 p-4 text-xs space-y-2">
-                <p class="font-extrabold text-center text-blue-950 uppercase">LEMBAR PERNYATAAN MINAT / PERSETUJUAN AWAL</p>
-                <p>Pihak sekolah menyatakan berminat untuk membahas lebih lanjut / menyetujui pelaksanaan program dengan rincian teknis yang akan dituangkan dalam kesepakatan tersendiri.</p>
-                <div class="grid sm:grid-cols-3 gap-2 pt-1 text-[11px]">
-                  <p>Nama &amp; Jabatan: <strong id="prev-kepsek">Drs. Ahmad Hidayat, M.Pd.</strong></p>
-                  <p>Instansi: <strong id="prev-sekolah-inline">SMK Negeri 1 Nusantara</strong></p>
-                  <p>Tanggal: <strong>..................... 2026</strong></p>
-                </div>
-              </div>
-            </div>
-
-            <!-- DOKUMEN 2: SURAT KERJASAMA RINGKAS -->
-            <div id="letter-kerjasama" class="hidden space-y-4">
-              <div class="text-center space-y-1">
-                <h4 class="font-black text-base uppercase underline text-blue-950">SURAT KERJASAMA</h4>
-                <p class="text-xs font-bold text-slate-600">Nomor: <span id="prev-nomor-2">010/SK-PTWDM/XI/2026</span></p>
-                <p class="text-xs font-semibold">Perihal: Kerjasama Program Edukasi Digital dan AI</p>
-              </div>
-
-              <div>
-                <p>Kepada Yth.</p>
-                <p><strong>Kepala Sekolah <span id="prev-sekolah-2">SMK Negeri 1 Nusantara</span></strong></p>
-                <p>di Tempat</p>
-              </div>
-
-              <p class="italic">Assalamu'alaikum Wr. Wb.</p>
-              <p>
-                Salam sejahtera kami sampaikan, semoga Bapak/Ibu beserta seluruh civitas akademika senantiasa dalam keadaan sehat dan sukses dalam menjalankan tugas dan pengabdian kepada dunia pendidikan.
-              </p>
-              <p>
-                Sehubungan dengan komitmen kami dalam mendukung pendidikan digital di Indonesia, <strong>PT Web Digital Marketing</strong> dengan ini mengajukan kerja sama dengan Sekolah Bapak/Ibu untuk melaksanakan program:
-              </p>
-
-              <div class="rounded-2xl bg-blue-950 p-4 text-center text-white">
-                <p class="text-xs font-bold text-cyan-300">LATIFSAFRUDDIN AI</p>
-                <p class="text-xl font-black text-amber-400">GO TO SCHOOL</p>
-                <p class="text-xs text-slate-200">Edukasi Digital untuk Masa Depan yang Lebih Baik</p>
-              </div>
-
-              <div class="space-y-1.5">
-                <p class="font-bold text-blue-950">Ruang Lingkup Kerjasama:</p>
-                <ol class="list-decimal pl-5 space-y-1 font-medium">
-                  <li>Pelatihan AI &amp; ChatGPT untuk Pelajar dan Guru.</li>
-                  <li>Pembuatan Website Sekolah dan Digitalisasi Layanan.</li>
-                  <li>Workshop Digital Marketing dan Kewirausahaan.</li>
-                  <li>Program Literasi Digital dan Inovasi Teknologi.</li>
-                  <li>Kegiatan lain yang disepakati bersama.</li>
-                </ol>
-              </div>
-
-              <p>
-                Kerjasama ini bertujuan untuk meningkatkan kompetensi digital siswa, guru, dan tenaga pendidik dalam menghadapi tantangan era kecerdasan buatan (AI) serta mendorong terwujudnya sekolah yang cerdas, kreatif, dan berdaya saing di era digital.
-              </p>
-              <p>
-                Demikian surat kerjasama ini kami buat dengan penuh semangat dan harapan besar, atas perhatian dan kerjasamanya kami ucapkan terima kasih.
-              </p>
-              <p class="italic">Wassalamu'alaikum Wr. Wb.</p>
-
-              <div class="flex justify-end pt-4 text-center">
-                <div>
-                  <p class="text-xs font-semibold" id="prev-tanggal-2">Sleman, 20 November 2026</p>
-                  <p class="font-bold">PT Web Digital Marketing</p>
-                  <div class="h-14 flex items-center justify-center">
-                    <span class="rounded-full border-2 border-blue-900 px-3 py-1 text-[10px] font-black text-blue-900">W3 • PT WEB DIGITAL MARKETING YOGYAKARTA</span>
-                  </div>
-                  <p class="font-bold underline">LATIF SAFRUDDIN</p>
-                </div>
-              </div>
-            </div>
-
-            <div class="border-t border-slate-300 pt-2 text-center text-[10px] font-bold text-blue-900">
-              PT WEB DIGITAL MARKETING | Kolaborasi untuk Pendidikan Digital demi Masa Depan Indonesia
             </div>
           </div>
         </div>
-      </div>
-    </section>
-
-    <!-- ==================== TAB 3: MODUL & PROMPT BANK (BAB 1 - 10) ==================== -->
-    <section id="tab-modul" class="tab-panel hidden space-y-6">
-      <!-- Header Identitas Modul -->
-      <div class="rounded-3xl border border-brand-cyan/30 bg-gradient-to-br from-brand-navy via-brand-blue/60 to-slate-900 p-6 sm:p-8 space-y-5">
-        <div class="flex flex-wrap items-start justify-between gap-4">
-          <div class="space-y-1.5 max-w-2xl">
-            <span class="inline-block rounded-full bg-brand-gold/15 border border-brand-gold/40 px-3 py-1 text-xs font-extrabold text-brand-gold">
-              MODUL RESMI • PENDIDIKAN UNTUK MASA DEPAN
-            </span>
-            <h2 class="text-2xl sm:text-3xl font-black text-white">Generasi Cerdas Menguasai AI &amp; ChatGPT</h2>
-            <p class="text-xs sm:text-sm text-slate-200">
-              Panduan Praktis untuk Pelajar SMP/SMA/SMK, Santri, Mahasiswa, dan Organisasi • <strong>Metode: 20% Penjelasan &amp; 80% Praktik</strong>.
-            </p>
-            <p class="text-xs italic text-brand-cyan">
-              "AI bukan pengganti proses belajar. AI adalah alat untuk membantu kita belajar lebih cerdas, kreatif, dan bertanggung jawab."
-            </p>
-          </div>
-
-          <div class="w-full sm:w-64 rounded-2xl border border-white/10 bg-slate-950/70 p-4 space-y-2">
-            <div class="flex justify-between text-xs font-bold">
-              <span class="text-slate-300">Progres Bab Modul</span>
-              <span id="modul-progress-text" class="text-brand-gold">10% (1/10 Bab)</span>
-            </div>
-            <div class="h-3 w-full overflow-hidden rounded-full bg-slate-800">
-              <div id="modul-progress-bar" class="h-full rounded-full bg-gradient-to-r from-brand-cyan to-brand-gold transition-all duration-300" style="width: 10%"></div>
-            </div>
-            <p class="text-[11px] text-slate-400">Pelajari 10 Bab kurikulum &amp; salin template prompt untuk praktik.</p>
-          </div>
-        </div>
-
-        <!-- Sub-Tab Navigasi di dalam Modul -->
-        <div class="flex flex-wrap gap-2 border-t border-white/10 pt-4">
-          <button onclick="switchModulSubTab('bab')" id="subbtn-bab" class="rounded-xl bg-brand-electric px-4 py-2 text-xs font-bold text-white transition">
-            Daftar Bab 1–10 &amp; Prompt
-          </button>
-          <button onclick="switchModulSubTab('rumus')" id="subbtn-rumus" class="rounded-xl border border-white/15 bg-slate-950/60 px-4 py-2 text-xs font-bold text-slate-300 hover:text-white transition">
-            Rumus 5 Bagian Prompt &amp; Etika
-          </button>
-          <button onclick="switchModulSubTab('lembarkerja')" id="subbtn-lembarkerja" class="rounded-xl border border-white/15 bg-slate-950/60 px-4 py-2 text-xs font-bold text-slate-300 hover:text-white transition">
-            Lembar Kerja Peserta (Hal. 20)
-          </button>
-          <button onclick="switchModulSubTab('rundown')" id="subbtn-rundown" class="rounded-xl border border-white/15 bg-slate-950/60 px-4 py-2 text-xs font-bold text-slate-300 hover:text-white transition">
-            Rundown Pelatihan 1 Hari
-          </button>
-        </div>
-      </div>
-
-      <!-- Sub-Panel A: Grid Bab 1 - 10 -->
-      <div id="subpanel-bab" class="grid gap-5 md:grid-cols-2">
-        <!-- Diisi dinamis oleh JS -->
-      </div>
-
-      <!-- Sub-Panel B: Rumus Prompt 5 Bagian & Checklist Etika -->
-      <div id="subpanel-rumus" class="hidden grid gap-6 lg:grid-cols-12">
-        <div class="lg:col-span-7 rounded-3xl border border-white/10 bg-slate-900 p-6 space-y-4">
-          <h3 class="text-lg font-extrabold text-white">Rumus 5 Bagian Menyusun Prompt Efektif (Bab 2)</h3>
-          <div class="overflow-x-auto">
-            <table class="w-full text-left text-xs sm:text-sm border-collapse">
-              <thead>
-                <tr class="border-b border-white/15 text-brand-gold">
-                  <th class="py-2.5 pr-3">Bagian</th>
-                  <th class="py-2.5 pr-3">Penjelasan</th>
-                  <th class="py-2.5">Contoh</th>
-                </tr>
-              </thead>
-              <tbody class="divide-y divide-white/10 text-slate-200">
-                <tr>
-                  <td class="py-2.5 pr-3 font-bold text-brand-cyan">1. Peran</td>
-                  <td class="py-2.5 pr-3">Tentukan keahlian atau sudut pandang yang diminta.</td>
-                  <td class="py-2.5 italic">"Bertindaklah sebagai tutor matematika."</td>
-                </tr>
-                <tr>
-                  <td class="py-2.5 pr-3 font-bold text-brand-cyan">2. Tugas</td>
-                  <td class="py-2.5 pr-3">Jelaskan pekerjaan yang harus dilakukan.</td>
-                  <td class="py-2.5 italic">"Jelaskan konsep persamaan kuadrat."</td>
-                </tr>
-                <tr>
-                  <td class="py-2.5 pr-3 font-bold text-brand-cyan">3. Konteks</td>
-                  <td class="py-2.5 pr-3">Berikan tingkat pendidikan dan materi.</td>
-                  <td class="py-2.5 italic">"Saya siswa kelas XI yang baru belajar topik ini."</td>
-                </tr>
-                <tr>
-                  <td class="py-2.5 pr-3 font-bold text-brand-cyan">4. Format</td>
-                  <td class="py-2.5 pr-3">Tentukan bentuk jawaban.</td>
-                  <td class="py-2.5 italic">"Gunakan langkah-langkah dan tabel ringkas."</td>
-                </tr>
-                <tr>
-                  <td class="py-2.5 pr-3 font-bold text-brand-cyan">5. Batasan</td>
-                  <td class="py-2.5 pr-3">Jelaskan gaya, panjang, atau hal yang dihindari.</td>
-                  <td class="py-2.5 italic">"Gunakan bahasa sederhana; jangan mengarang sumber."</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-
-        <div class="lg:col-span-5 rounded-3xl border border-brand-gold/30 bg-slate-900 p-6 space-y-4">
-          <h3 class="text-lg font-extrabold text-brand-gold">Checklist Etika &amp; Integritas Akademik (Bab 9)</h3>
-          <ul class="space-y-2.5 text-xs sm:text-sm text-slate-200">
-            <li class="flex items-start gap-2.5 rounded-xl bg-slate-950 p-3">
-              <span class="text-brand-cyan font-bold">✓</span>
-              <span><strong>Jujur:</strong> Tidak mengaku sebagai karya mandiri jika sebagian dibuat AI tanpa pengungkapan.</span>
-            </li>
-            <li class="flex items-start gap-2.5 rounded-xl bg-slate-950 p-3">
-              <span class="text-brand-cyan font-bold">✓</span>
-              <span><strong>Kritis:</strong> Periksa fakta, angka, kutipan, dan sumber asli di buku/jurnal.</span>
-            </li>
-            <li class="flex items-start gap-2.5 rounded-xl bg-slate-950 p-3">
-              <span class="text-brand-cyan font-bold">✓</span>
-              <span><strong>Aman:</strong> Jangan pernah memasukkan password, PIN, OTP, NIK, atau dokumen rahasia.</span>
-            </li>
-            <li class="flex items-start gap-2.5 rounded-xl bg-slate-950 p-3">
-              <span class="text-brand-cyan font-bold">✓</span>
-              <span><strong>Hargai Hak Cipta &amp; Privasi:</strong> Gunakan gambar/musik berizin dan minta izin sebelum mengunggah foto orang lain.</span>
-            </li>
-          </ul>
-        </div>
-      </div>
-
-      <!-- Sub-Panel C: Lembar Kerja Peserta Interaktif -->
-      <div id="subpanel-lembarkerja" class="hidden rounded-3xl border border-white/10 bg-slate-900 p-6 sm:p-8 space-y-6">
-        <div class="flex flex-wrap items-center justify-between gap-3 border-b border-white/10 pb-4">
-          <div>
-            <h3 class="text-xl font-black text-white">Lembar Kerja Peserta (Eksperimen Prompt &amp; Refleksi)</h3>
-            <p class="text-xs text-slate-400">Sesuai Halaman 20 Modul Pelatihan — catat eksperimen prompt pertama dan hasil perbaikannya.</p>
-          </div>
-          <button onclick="saveWorksheet()" class="rounded-xl bg-brand-gold px-4 py-2 text-xs font-extrabold text-slate-950 hover:brightness-105">
-            Simpan Lembar Kerja
-          </button>
-        </div>
-
-        <div class="grid gap-6 md:grid-cols-2 text-sm">
-          <div class="space-y-3 rounded-2xl bg-slate-950 p-5 border border-white/10">
-            <h4 class="font-bold text-brand-cyan">A. Rencana Belajar Pribadi</h4>
-            <div>
-              <label class="block text-xs text-slate-400 mb-1">Materi / Bidang yang Ingin Dipelajari</label>
-              <input id="ws-materi" type="text" placeholder="Contoh: Ekosistem Biologi / Dasar HTML" class="w-full rounded-xl border border-white/15 bg-slate-900 px-3 py-2 text-white" />
-            </div>
-            <div>
-              <label class="block text-xs text-slate-400 mb-1">Hal yang Paling Sulit Dipahami</label>
-              <input id="ws-sulit" type="text" placeholder="Tuliskan bagian yang masih membingungkan..." class="w-full rounded-xl border border-white/15 bg-slate-900 px-3 py-2 text-white" />
-            </div>
-            <div>
-              <label class="block text-xs text-slate-400 mb-1">Sumber Belajar Resmi untuk Verifikasi</label>
-              <input id="ws-sumber" type="text" placeholder="Contoh: Buku Paket Kemdikbud / Jurnal / Catatan Guru" class="w-full rounded-xl border border-white/15 bg-slate-900 px-3 py-2 text-white" />
-            </div>
-          </div>
-
-          <div class="space-y-3 rounded-2xl bg-slate-950 p-5 border border-white/10">
-            <h4 class="font-bold text-brand-gold">B. Catatan Eksperimen Prompt</h4>
-            <div>
-              <label class="block text-xs text-slate-400 mb-1">Prompt Pertama</label>
-              <textarea id="ws-prompt1" rows="2" placeholder="Tulis prompt awal yang kamu coba..." class="w-full rounded-xl border border-white/15 bg-slate-900 px-3 py-2 text-white"></textarea>
-            </div>
-            <div>
-              <label class="block text-xs text-slate-400 mb-1">Apa yang Perlu Diperbaiki dari Hasil Pertama?</label>
-              <input id="ws-perbaikan" type="text" placeholder="Contoh: Terlalu umum, belum ada contoh soal..." class="w-full rounded-xl border border-white/15 bg-slate-900 px-3 py-2 text-white" />
-            </div>
-            <div>
-              <label class="block text-xs text-slate-400 mb-1">Prompt Setelah Diperbaiki (Rumus 5 Bagian)</label>
-              <textarea id="ws-prompt2" rows="2" placeholder="Tulis versi prompt yang sudah disempurnakan..." class="w-full rounded-xl border border-white/15 bg-slate-900 px-3 py-2 text-white"></textarea>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Sub-Panel D: Rundown Pelatihan 1 Hari -->
-      <div id="subpanel-rundown" class="hidden rounded-3xl border border-white/10 bg-slate-900 p-6 sm:p-8 space-y-4">
-        <h3 class="text-xl font-black text-white">Contoh Rundown Pelatihan 1 Hari (Halaman 22)</h3>
-        <p class="text-xs text-slate-400">Jadwal dapat disesuaikan dengan jumlah peserta, fasilitas, dan kebijakan sekolah/kampus.</p>
-        <div class="overflow-x-auto">
-          <table class="w-full text-left text-xs sm:text-sm border-collapse">
-            <thead>
-              <tr class="border-b border-white/15 text-brand-gold">
-                <th class="py-2.5 pr-4">Waktu</th>
-                <th class="py-2.5 pr-4">Kegiatan</th>
-                <th class="py-2.5">Metode</th>
-              </tr>
-            </thead>
-            <tbody class="divide-y divide-white/10 text-slate-200">
-              <tr><td class="py-2.5 pr-4 font-bold text-brand-cyan">09.00–09.15</td><td class="py-2.5 pr-4">Pembukaan dan pengantar pelatihan</td><td class="py-2.5">Sambutan</td></tr>
-              <tr><td class="py-2.5 pr-4 font-bold text-brand-cyan">09.15–10.00</td><td class="py-2.5 pr-4">Mengenal AI, ChatGPT, manfaat, dan keterbatasan</td><td class="py-2.5">Penjelasan dan diskusi</td></tr>
-              <tr><td class="py-2.5 pr-4 font-bold text-brand-cyan">10.00–11.00</td><td class="py-2.5 pr-4">Menyusun prompt yang efektif (Rumus 5 Bagian)</td><td class="py-2.5">Demonstrasi dan praktik</td></tr>
-              <tr><td class="py-2.5 pr-4 font-bold text-brand-cyan">11.00–12.00</td><td class="py-2.5 pr-4">AI untuk belajar, rangkuman, dan latihan soal</td><td class="py-2.5">Praktik individu</td></tr>
-              <tr class="bg-slate-950/60"><td class="py-2.5 pr-4 font-bold text-slate-400">12.00–13.00</td><td class="py-2.5 pr-4 text-slate-400">Istirahat, ibadah, dan makan</td><td class="py-2.5 text-slate-400">Istirahat</td></tr>
-              <tr><td class="py-2.5 pr-4 font-bold text-brand-cyan">13.00–14.00</td><td class="py-2.5 pr-4">AI untuk tugas, presentasi, dan karya edukasi</td><td class="py-2.5">Praktik kelompok</td></tr>
-              <tr><td class="py-2.5 pr-4 font-bold text-brand-cyan">14.00–14.45</td><td class="py-2.5 pr-4">Pengenalan etika, keamanan, dan verifikasi</td><td class="py-2.5">Studi kasus</td></tr>
-              <tr><td class="py-2.5 pr-4 font-bold text-brand-cyan">14.45–15.15</td><td class="py-2.5 pr-4">Penyusunan proyek akhir dan refleksi</td><td class="py-2.5">Presentasi singkat</td></tr>
-              <tr><td class="py-2.5 pr-4 font-bold text-brand-cyan">15.15–15.30</td><td class="py-2.5 pr-4">Evaluasi dan penutupan</td><td class="py-2.5">Umpan balik</td></tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-    </section>
-
-    <!-- ==================== TAB 4: EVALUASI & TUGAS PASCA-PELATIHAN ==================== -->
-    <section id="tab-evaluasi" class="tab-panel hidden space-y-6">
-      <div class="grid gap-6 lg:grid-cols-12">
-        <!-- Kolom Kiri: Kuis Evaluasi -->
-        <div class="lg:col-span-7 rounded-3xl border border-white/10 bg-slate-900 p-6 sm:p-8 space-y-6">
-          <div class="flex flex-wrap items-center justify-between gap-2 border-b border-white/10 pb-4">
-            <div>
-              <span class="text-xs font-bold text-brand-cyan uppercase">Asesmen Pemahaman</span>
-              <h2 class="text-xl sm:text-2xl font-black text-white">Evaluasi Pasca-Pelatihan</h2>
-              <p class="text-xs text-slate-400 mt-0.5">Nilai minimal kelulusan: <strong>80 / 100</strong> (4 dari 5 soal benar).</p>
-            </div>
-            <span id="quiz-badge" class="rounded-xl bg-slate-800 px-3 py-1.5 text-xs font-bold text-slate-300">Belum Dikerjakan</span>
-          </div>
-
-          <form id="quiz-form" onsubmit="submitQuiz(event)" class="space-y-5">
-            <div id="quiz-questions" class="space-y-5">
-              <!-- Soal dirender oleh JS -->
-            </div>
-            <button type="submit" class="w-full rounded-2xl bg-brand-electric py-3.5 text-sm font-extrabold text-white shadow-lg shadow-blue-600/30 hover:bg-blue-500 transition">
-              Kirim Jawaban Evaluasi
-            </button>
-          </form>
-        </div>
-
-        <!-- Kolom Kanan: Tugas Pasca-Pelatihan -->
-        <div class="lg:col-span-5 space-y-6">
-          <div class="rounded-3xl border border-brand-gold/30 bg-slate-900 p-6 space-y-4">
-            <div class="flex items-center justify-between">
-              <span class="rounded-xl bg-brand-gold/15 px-3 py-1 text-xs font-extrabold text-brand-gold">Tugas Praktik Portofolio</span>
-              <span id="task-badge" class="rounded-xl bg-slate-800 px-3 py-1 text-xs font-bold text-slate-300">Belum Dikumpulkan</span>
-            </div>
-
-            <h3 class="text-xl font-black text-white">Pengumpulan Tugas Pasca-Pelatihan</h3>
-            <p class="text-xs text-slate-300 leading-relaxed">
-              Pilih 1 proyek nyata di bawah ini, kerjakan dengan bantuan AI secara etis, lalu kumpulkan tautan hasilnya untuk membuka akses sertifikat:
-            </p>
-
-            <div class="space-y-2 rounded-2xl bg-slate-950 p-4 text-xs text-slate-300 border border-white/10">
-              <p class="font-bold text-brand-cyan">Pilihan Proyek Akhir (Bab 10 Modul):</p>
-              <ul class="list-disc pl-4 space-y-1">
-                <li><strong>Opsi A (Paket Belajar):</strong> Rangkuman materi, peta konsep, dan kuis beserta pembahasan.</li>
-                <li><strong>Opsi B (Presentasi Edukasi):</strong> Presentasi 5–8 slide dengan sumber informasi terverifikasi.</li>
-                <li><strong>Opsi C (Poster / Infografis):</strong> Satu poster informatif dengan pesan dan sumber jelas.</li>
-                <li><strong>Opsi D (Video Edukasi):</strong> Video 30–90 detik beserta naskah/storyboard.</li>
-                <li><strong>Opsi E (Proyek Organisasi):</strong> Proposal kegiatan atau kampanye edukasi OSIS/BEM/UKM.</li>
-              </ul>
-            </div>
-
-            <form id="task-form" onsubmit="submitTask(event)" class="space-y-3 text-sm">
-          <!-- Rubrik Penilaian Ringkas Sesuai Bab 10 -->
-          <div class="rounded-3xl border border-white/10 bg-slate-900/80 p-5 text-xs space-y-2">
-            <p class="font-bold text-white">Rubrik Penilaian Proyek Akhir (Bab 10 Modul):</p>
-            <div class="grid grid-cols-2 sm:grid-cols-3 gap-2 text-slate-300">
-              <div class="rounded-xl bg-slate-950 p-2.5"><strong>30%</strong> Pemahaman Materi</div>
-              <div class="rounded-xl bg-slate-950 p-2.5"><strong>20%</strong> Kreativitas</div>
-              <div class="rounded-xl bg-slate-950 p-2.5"><strong>20%</strong> Ketepatan Sumber</div>
-              <div class="rounded-xl bg-slate-950 p-2.5"><strong>15%</strong> Pemanfaatan AI</div>
-              <div class="rounded-xl bg-slate-950 p-2.5 col-span-2 sm:col-span-2"><strong>15%</strong> Etika, Kejujuran &amp; Kerapian</div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ==================== TAB 5: SERTIFIKAT & VERIFIKASI ==================== -->
-    <section id="tab-sertifikat" class="tab-panel hidden space-y-6">
-      <!-- Status Kelayakan Sertifikat -->
-      <div class="rounded-3xl border border-white/10 bg-slate-900 p-6 flex flex-wrap items-center justify-between gap-4">
-        <div class="space-y-1">
-          <h2 class="text-xl sm:text-2xl font-black text-white">Sertifikat Penghargaan &amp; Pusat Verifikasi</h2>
-          <p id="cert-status-desc" class="text-sm text-slate-300">
-            Selesaikan <strong>Kuis Evaluasi (skor &ge; 80)</strong> dan <strong>Tugas Pasca-Pelatihan</strong> untuk mengaktifkan sertifikat resmi.
-          </p>
-        </div>
-        <div class="flex flex-wrap gap-2">
-          <button onclick="demoUnlockCert()" class="rounded-xl border border-brand-cyan/40 bg-brand-cyan/10 px-4 py-2.5 text-xs font-bold text-brand-cyan hover:bg-brand-cyan/20 transition">
-            Simulasi Lulus (Demo)
-          </button>
-          <button id="btn-print-cert" onclick="printSection('certificate-card')" disabled class="rounded-xl bg-gradient-to-r from-brand-gold to-brand-amber px-4 py-2.5 text-xs sm:text-sm font-extrabold text-slate-950 disabled:opacity-40 disabled:cursor-not-allowed transition">
-            Cetak / Unduh Sertifikat
-          </button>
-        </div>
-      </div>
-
-      <!-- Pratinjau Sertifikat Sesuai Desain Resmi SERTIFIKAT.jpg -->
-      <div class="relative">
-        <div id="cert-lock-overlay" class="absolute inset-0 z-10 flex flex-col items-center justify-center rounded-3xl bg-slate-950/80 backdrop-blur-sm p-6 text-center">
-          <div class="flex h-14 w-14 items-center justify-center rounded-2xl bg-brand-gold/20 text-brand-gold text-2xl font-black mb-3">🔒</div>
-          <h3 class="text-lg font-extrabold text-white">Sertifikat Masih Terkunci</h3>
-          <p class="max-w-md text-xs sm:text-sm text-slate-300 mt-1">
-            Silakan selesaikan kuis evaluasi dan unggah tautan tugas pasca-pelatihan pada tab <strong>Evaluasi &amp; Tugas</strong>, atau klik <em>Simulasi Lulus (Demo)</em> di atas untuk melihat pratinjau penuh.
-          </p>
-          <button onclick="switchTab('evaluasi')" class="mt-4 rounded-xl bg-brand-electric px-4 py-2.5 text-xs font-bold text-white hover:bg-blue-500 transition">
-            Ke Halaman Evaluasi &amp; Tugas
-          </button>
-        </div>
-
-        <div id="certificate-card" class="relative overflow-hidden rounded-3xl border-4 border-brand-gold bg-gradient-to-br from-[#030B21] via-[#081F54] to-[#040D26] p-4 sm:p-8 text-white shadow-2xl">
-          <!-- Ornamen Circuit Lines Kiri & Kanan -->
-          <svg class="pointer-events-none absolute left-0 top-1/2 -translate-y-1/2 h-72 w-44 opacity-35" viewBox="0 0 180 300" fill="none">
-            <path d="M0 40H65L95 70H150M0 90H85L115 120H165M0 150H130M0 210H85L115 180H165M0 260H65L95 230H150" stroke="#00D4FF" stroke-width="2"/>
-            <circle cx="152" cy="70" r="4" fill="#00D4FF"/>
-            <circle cx="167" cy="120" r="4" fill="#00D4FF"/>
-            <circle cx="132" cy="150" r="5" fill="#FACC15"/>
-            <circle cx="167" cy="180" r="4" fill="#00D4FF"/>
-            <circle cx="152" cy="230" r="4" fill="#00D4FF"/>
-          </svg>
-          <svg class="pointer-events-none absolute right-0 top-1/2 -translate-y-1/2 h-72 w-44 opacity-35 rotate-180" viewBox="0 0 180 300" fill="none">
-            <path d="M0 40H65L95 70H150M0 90H85L115 120H165M0 150H130M0 210H85L115 180H165M0 260H65L95 230H150" stroke="#00D4FF" stroke-width="2"/>
-            <circle cx="152" cy="70" r="4" fill="#00D4FF"/>
-            <circle cx="167" cy="120" r="4" fill="#00D4FF"/>
-            <circle cx="132" cy="150" r="5" fill="#FACC15"/>
-            <circle cx="167" cy="180" r="4" fill="#00D4FF"/>
-            <circle cx="152" cy="230" r="4" fill="#00D4FF"/>
-          </svg>
-
-          <!-- Bingkai Emas Ganda -->
-          <div class="relative rounded-2xl border-2 border-brand-gold/80 p-5 sm:p-9 text-center space-y-4">
-            <!-- Baris Atas: Logo W3 - Judul Sertifikat Penghargaan - Logo LS -->
-            <div class="flex flex-wrap items-center justify-between gap-4">
-              <div class="flex items-center gap-2">
-                <svg class="h-11 w-11 shrink-0" viewBox="0 0 120 110" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <rect x="44" y="18" width="5" height="5" rx="1" fill="#00D4FF"/>
-                  <rect x="52" y="12" width="6" height="6" rx="1" fill="#1D63FF"/>
-                  <path d="M62 24H82C102 24 114 40 114 60C114 80 100 94 82 94H74C88 86 96 74 96 60C96 45 86 35 72 35H58L62 24Z" fill="#CBD5E1"/>
-                  <path d="M12 25H26L38 66L50 38H61L71 66L82 38H94L76 92H64L55 66L44 92H32L12 25Z" fill="#1D63FF"/>
-                  <path d="M67 48H89L79 62C87 63 92 69 90 78C88 87 79 92 67 92H59L62 82H68C74 82 78 79 79 75C80 71 76 68 70 68H66L67 48Z" fill="#00D4FF"/>
-                </svg>
-                <div class="text-left leading-none">
-                  <span class="block text-xs font-black text-white">PT WEB</span>
-                  <span class="text-[8px] font-bold text-brand-cyan">DIGITAL MARKETING</span>
-                </div>
-              </div>
-
-              <div class="text-center">
-                <h3 class="text-2xl sm:text-4xl font-black tracking-wider bg-gradient-to-b from-yellow-200 via-brand-gold to-amber-500 bg-clip-text text-transparent">
-                  SERTIFIKAT PENGHARGAAN
-                </h3>
-                <p class="text-xs sm:text-sm italic text-slate-200 mt-1">Diberikan kepada:</p>
-              </div>
-
-              <div class="flex items-center gap-2">
-                <svg class="h-10 w-10 shrink-0" viewBox="0 0 110 110" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M32 86C32 76 22 72 22 62C22 57 17 54 17 50C17 45 23 41 24 34C26 20 39 12 54 12C67 12 77 18 82 28" stroke="#00D4FF" stroke-width="4" stroke-linecap="round"/>
-                  <path d="M34 34H44V70H68L61 79H34V34Z" fill="#FFFFFF"/>
-                  <path d="M92 34H67C57 34 51 40 51 48C51 56 57 60 68 62C76 63 80 65 80 70C80 74 75 77 67 77H48L36 89H69C83 89 92 81 92 70C92 60 85 55 73 53C65 52 62 50 62 46C62 43 65 41 71 41H86L92 34Z" fill="#38BDF8"/>
-                </svg>
-                <div class="text-left leading-none">
-                  <span class="block text-xs font-black text-white">LATIFSAFRUDDIN <span class="text-brand-cyan">AI</span></span>
-                  <span class="text-[7px] font-bold text-brand-gold">AI • KREATIVITAS • DIGITAL • SOLUSI</span>
-                </div>
-              </div>
-            </div>
-
-            <!-- Nama Peserta & Sekolah -->
-            <div class="pt-1">
-              <div class="mx-auto max-w-xl border-b border-white/60 pb-2">
-                <p id="cert-holder-name" class="text-2xl sm:text-4xl font-black text-white tracking-tight">
-                  Raka Pratama Wijaya
-                </p>
-              </div>
-              <p id="cert-holder-school" class="mt-2 text-xs sm:text-sm font-bold text-brand-cyan">
-                SMK Negeri 1 Nusantara • No. Reg: <span id="cert-number">GTS-2026-88412</span>
-              </p>
-            </div>
-
-            <!-- Keterangan Kegiatan Sesuai Desain Sertifikat -->
-            <div class="space-y-1.5">
-              <p class="text-xs sm:text-sm text-slate-200">Atas partisipasinya dalam kegiatan:</p>
-              <p class="text-sm sm:text-base font-extrabold text-white tracking-wide uppercase">
-                PT WEB DIGITAL MARKETING &amp; <span class="text-brand-cyan">LATIFSAFRUDDIN AI</span>
-              </p>
-              <p class="text-3xl sm:text-5xl font-black tracking-tight bg-gradient-to-b from-yellow-200 via-brand-gold to-amber-500 bg-clip-text text-transparent drop-shadow">
-                GO TO SCHOOL
-              </p>
-              <div class="inline-block rounded-lg bg-brand-gold px-4 py-1 text-xs sm:text-sm font-extrabold text-slate-950">
-                Edukasi Digital untuk Masa Depan yang Lebih Baik
-              </div>
-            </div>
-
-            <!-- 4 Poin Materi Sertifikat -->
-            <div class="mx-auto max-w-xl space-y-1 text-xs sm:text-sm font-semibold text-slate-100">
-              <p>Pelatihan AI &amp; ChatGPT untuk Pelajar &amp; Mahasiswa</p>
-              <p>Tips Membuat Website &amp; Konten Digital</p>
-              <p>Strategi Digital Marketing untuk Masa Depan</p>
-              <p>Inspirasi Berwirausaha di Era Digital</p>
-            </div>
-
-            <!-- Baris Bawah: Stempel + TTD Latif Safruddin | Medali Emas & Tanggal | Kolom Kepala Sekolah -->
-            <div class="grid gap-6 sm:grid-cols-3 items-end pt-4 text-xs">
-              <!-- Kiri: Stempel Bulat PT Web Digital Marketing + TTD -->
-              <div class="relative flex flex-col items-center">
-                <div class="flex items-center gap-2">
-                  <div class="flex h-16 w-16 items-center justify-center rounded-full border-2 border-brand-cyan bg-white/95 text-blue-950 shadow-lg">
-                    <div class="text-center leading-none">
-                      <p class="text-[6.5px] font-black">PT WEB DIGITAL MARKETING</p>
-                      <p class="text-xs font-black text-blue-700 my-0.5">W3</p>
-                      <p class="text-[6px] font-extrabold">YOGYAKARTA</p>
-                    </div>
-                  </div>
-                  <div class="text-left">
-                    <p class="font-serif italic text-base text-brand-cyan">Latif Safruddin</p>
-                    <div class="border-t border-white/70 pt-1">
-                      <p class="font-extrabold text-white">LATIF SAFRUDDIN</p>
-                      <p class="text-[10px] text-slate-300">PT WEB DIGITAL MARKETING</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <!-- Tengah: Medali Emas & Tanggal Pelaksanaan -->
-              <div class="flex flex-col items-center space-y-1.5">
-                <div class="flex h-14 w-14 items-center justify-center rounded-full border-2 border-yellow-200 bg-gradient-to-b from-yellow-300 via-brand-gold to-amber-600 text-slate-950 font-black text-xs shadow-lg">
-                  ★ AI ★
-                </div>
-                <p id="cert-date" class="text-xs font-bold text-slate-200">20 November 2026 • Sleman, Yogyakarta</p>
-              </div>
-
-              <!-- Kanan: Kepala Sekolah -->
-              <div class="flex flex-col items-center">
-                <div class="h-10"></div>
-                <div class="w-48 border-t border-white/70 pt-1 text-center">
-                  <p id="cert-kepsek-name" class="font-extrabold text-white">Drs. Ahmad Hidayat, M.Pd.</p>
-                  <p class="text-[10px] font-bold tracking-wider text-slate-300 uppercase">KEPALA SEKOLAH</p>
-                </div>
-              </div>
-            </div>
-
-            <!-- Slogan Penutup Sertifikat -->
-            <div class="border-t border-white/15 pt-3 text-center">
-              <p class="text-xs font-bold italic text-white">Bersama Membangun Generasi Digital Indonesia</p>
-              <p class="text-xs font-extrabold italic text-brand-gold">Siapkan Diri Menjadi Generasi Unggul di Era AI!</p>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Cek Validitas Nomor Sertifikat -->
-      <div class="rounded-3xl border border-white/10 bg-slate-900 p-6">
-        <h3 class="text-base font-extrabold text-white mb-2">Verifikasi Keaslian Sertifikat</h3>
-        <div class="flex flex-col sm:flex-row gap-3">
-          <input id="verify-input" type="text" placeholder="Masukkan Nomor Registrasi (contoh: GTS-2026-88412)" class="flex-1 rounded-xl border border-white/15 bg-slate-950 px-4 py-2.5 text-sm text-white focus:border-brand-cyan focus:outline-none" />
-          <button onclick="verifyCertificate()" class="rounded-xl bg-brand-electric px-5 py-2.5 text-sm font-bold text-white hover:bg-blue-500 transition">
-            Cek Keaslian
-          </button>
-        </div>
-        <p id="verify-result" class="mt-2.5 text-xs text-slate-400"></p>
       </div>
     </section>
 
   </main>
 
-  <!-- Area Tersembunyi Khusus Print -->
-  <div id="print-area" class="hidden"></div>
-
   <!-- Modal Pratinjau Flyer Penuh -->
-  <div id="flyer-modal" onclick="toggleFlyerModal(false)" class="fixed inset-0 z-50 hidden items-center justify-center bg-slate-950/90 p-4 backdrop-blur-md">
-    <div onclick="event.stopPropagation()" class="relative max-h-[92vh] w-full max-w-xl overflow-y-auto rounded-3xl border-2 border-brand-gold bg-slate-900 p-4 shadow-2xl">
-      <div class="mb-3 flex items-center justify-between">
-        <span class="text-xs font-extrabold uppercase tracking-wider text-brand-gold">Pratinjau Flyer Resmi — Go To School</span>
-        <button onclick="toggleFlyerModal(false)" class="rounded-xl bg-white/10 px-3 py-1.5 text-xs font-bold text-white hover:bg-white/20">
-          Tutup ✕
-        </button>
+  <div id="flyer-modal" onclick="toggleFlyerModal(false)" class="fixed inset-0 z-50 hidden items-center justify-center bg-slate-950/85 p-4 backdrop-blur-md">
+    <div onclick="event.stopPropagation()" class="relative max-w-lg w-full rounded-3xl border-2 border-brand-gold bg-gradient-to-b from-[#061844] via-[#0B2D7A] to-[#040E29] p-6 text-white shadow-2xl space-y-4">
+      <div class="flex items-center justify-between">
+        <span class="rounded-full bg-brand-gold px-3 py-1 text-xs font-black text-slate-950">POSTER RESMI GO TO SCHOOL</span>
+        <button onclick="toggleFlyerModal(false)" class="rounded-xl bg-white/10 px-3 py-1 text-xs font-bold text-white hover:bg-white/20">✕ Tutup</button>
       </div>
-      <div id="flyer-modal-body" class="overflow-hidden rounded-2xl"></div>
+      <div id="flyer-modal-body" class="space-y-4 text-center">
+        <h3 class="text-2xl sm:text-3xl font-black text-brand-gold">GO TO SCHOOL</h3>
+        <p class="text-sm font-bold text-brand-cyan">PT Web Digital Marketing &amp; Latifsafruddin AI</p>
+        <p class="text-xs sm:text-sm text-slate-200 leading-relaxed">
+          Program kunjungan edukasi teknologi ke sekolah &amp; kampus: Pelatihan AI &amp; ChatGPT, Pembuatan Website, Digital Marketing, dan Inspirasi Wirausaha Era Digital.
+        </p>
+        <div class="rounded-2xl bg-white/10 p-4 text-left text-xs space-y-1.5">
+          <p><strong>Kontak Kemitraan (WhatsApp):</strong> 0855 1236 277</p>
+          <p><strong>Website Resmi:</strong> ptwebdigitalmarketing.my.id | latifsafruddin.online</p>
+        </div>
+      </div>
     </div>
   </div>
 
   <!-- Footer -->
-  <footer class="mt-12 border-t border-white/10 bg-slate-950 py-8 text-center text-xs text-slate-400">
+  <footer class="mt-14 border-t border-white/10 bg-slate-950 py-8 text-center text-xs text-slate-400">
     <div class="mx-auto max-w-7xl px-4 space-y-2">
-      <p class="font-bold text-slate-200">PT Web Digital Marketing &amp; Latifsafruddin AI — Program Go To School</p>
-      <p>Belajar Teknologi, Meraih Masa Depan • Hubungi Kami: 0855 1236 277 • <a href="https://ptwebdigitalmarketing.my.id/" target="_blank" rel="noopener noreferrer" class="text-brand-cyan underline hover:text-brand-gold">ptwebdigitalmarketing.my.id</a> • <a href="http://www.latifsafruddin.online/" target="_blank" rel="noopener noreferrer" class="text-brand-cyan underline hover:text-brand-gold">latifsafruddin.online</a> • <a href="https://latifsafruddinia.web.id/" target="_blank" rel="noopener noreferrer" class="text-brand-cyan underline hover:text-brand-gold">latifsafruddinia.web.id</a></p>
+      <p class="font-bold text-slate-200">
+        © 2026 PT Web Digital Marketing &amp; Latifsafruddin AI — Program Go To School Indonesia
+      </p>
+      <p>
+        Kontak Kemitraan: <span class="text-brand-gold font-semibold">WA 0855 1236 277</span> •
+        <a href="https://ptwebdigitalmarketing.my.id/" target="_blank" rel="noopener noreferrer" class="text-brand-cyan hover:underline">ptwebdigitalmarketing.my.id</a> •
+        <a href="http://www.latifsafruddin.online/" target="_blank" rel="noopener noreferrer" class="text-brand-cyan hover:underline">latifsafruddin.online</a>
+      </p>
     </div>
   </footer>
 
+  <!-- Application Logic -->
   <script>
-    // ==================== STATE APLIKASI ====================
-    const appState = {
-      completedModules: [1],
-      quizPassed: false,
-      quizScore: 0,
-      taskSubmitted: false,
-      participantName: 'Raka Pratama Wijaya',
-      participantSchool: 'SMK Negeri 1 Nusantara',
-      certNumber: 'GTS-2026-88412',
+    // ==================== STATE & DATA ====================
+    const STORAGE_KEY = 'gts_portal_state_v2';
+    let appState = {
       lang: 'id',
       theme: 'dark',
+      students: [],
+      activeStudentIndex: -1,
+      bestScore: null,
+      certSerial: 'GTS-2026-' + Math.floor(10000 + Math.random() * 90000)
     };
 
-    // Data 4 Kesaksian Pelatihan (Bahasa Indonesia & Inggris)
-    const testimonialsData = [
+    const quizQuestions = [
       {
-        initials: 'RP',
-        name: 'Raka Pratama Wijaya',
-        role: {
-          id: 'Siswa Kelas XI RPL • SMK Negeri 1 Nusantara',
-          en: '11th Grade Software Engineering Student • SMK Negeri 1 Nusantara'
-        },
-        quote: {
-          id: '"Dulu saya bingung cara bertanya ke ChatGPT agar jawabannya akurat. Setelah belajar Rumus 5 Bagian Prompt di pelatihan ini, saya berhasil membuat prototipe website portofolio dalam 2 jam!"',
-          en: '"I used to struggle to get accurate answers from ChatGPT. After learning the 5-Part Prompt Formula in this workshop, I built my portfolio website prototype in just 2 hours!"'
-        },
-        tag: { id: 'Pelatihan AI & Website', en: 'AI & Website Workshop' }
-      },
-      {
-        initials: 'AN',
-        name: 'Alya Nabila Putri',
-        role: {
-          id: 'Mahasiswi Manajemen • Universitas Digital Yogyakarta',
-          en: 'Management Undergraduate • Digital University Yogyakarta'
-        },
-        quote: {
-          id: '"Materinya 80% praktik langsung dan sangat menekankan etika akademik. Saya jadi paham cara memakai AI untuk riset awal dan menyusun strategi konten digital marketing UMKM."',
-          en: '"The session is 80% hands-on practice with strong academic ethics. I learned how to use AI for initial research and craft digital marketing content strategies for local SMEs."'
-        },
-        tag: { id: 'Digital Marketing & Etika AI', en: 'Digital Marketing & AI Ethics' }
-      },
-      {
-        initials: 'AH',
-        name: 'Drs. Ahmad Hidayat, M.Pd.',
-        role: {
-          id: 'Kepala Sekolah • Mitra Program Go To School',
-          en: 'School Principal • Go To School Partner'
-        },
-        quote: {
-          id: '"Kolaborasi bersama PT Web Digital Marketing dan Latifsafruddin AI membuka wawasan siswa sekaligus guru kami. AI diposisikan tepat sebagai alat bantu berpikir kritis, bukan jalan pintas."',
-          en: '"Collaborating with PT Web Digital Marketing and Latifsafruddin AI broadened both our students’ and teachers’ horizons. AI is positioned properly as a critical-thinking aid, not a shortcut."'
-        },
-        tag: { id: 'Kemitraan Sekolah', en: 'School Partnership' }
-      },
-      {
-        initials: 'DF',
-        name: 'Dimas Fajar Ramadhan',
-        role: {
-          id: 'Ketua OSIS & Peserta Proyek Akhir Terbaik',
-          en: 'Student Council President & Best Final Project Awardee'
-        },
-        quote: {
-          id: '"Berkat Bab 8 tentang AI untuk organisasi, tim OSIS kami kini menyusun proposal kegiatan dan kalender publikasi jauh lebih rapi. Tugas pasca-pelatihannya langsung jadi portofolio nyata!"',
-          en: '"Thanks to Chapter 8 on AI for organizations, our student council now drafts event proposals and content calendars much faster. The post-training project became a real portfolio piece!"'
-        },
-        tag: { id: 'AI untuk Organisasi & Karya', en: 'AI for Organization & Portfolio' }
-      }
-    ];
-
-    // Data Lengkap 10 Bab Modul Pelatihan "Generasi Cerdas Menguasai AI & ChatGPT"
-    const modulesData = [
-      {
-        id: 1,
-        tag: 'BAB 1',
-        title: 'Mengenal AI dan ChatGPT',
-        duration: 'Hal. 4–5 • Konsep Dasar & Praktik Pembuka',
-        summary: 'Memahami Artificial Intelligence (AI), cara kerja ChatGPT, manfaat dalam pendidikan, serta keterbatasan AI (dapat keliru/bias sehingga wajib diverifikasi dengan sumber tepercaya).',
-        prompt: 'Halo ChatGPT. Saya seorang pelajar/mahasiswa yang sedang belajar menggunakan AI. Bantu saya memahami satu materi pelajaran dengan bahasa sederhana, berikan contoh, lalu ajukan tiga pertanyaan untuk menguji pemahaman saya.'
-      },
-      {
-        id: 2,
-        tag: 'BAB 2',
-        title: 'Keterampilan Menyusun Prompt (Rumus 5 Bagian)',
-        duration: 'Hal. 6–7 • Peran, Tugas, Konteks, Format, Batasan',
-        summary: 'Menguasai struktur prompt 5 bagian agar AI memberikan jawaban tepat sasaran, bertahap, dan disertai latihan soal tanpa mengarang sumber.',
-        prompt: 'Bertindaklah sebagai tutor biologi. Saya siswa kelas X dan sedang mempelajari ekosistem. Jelaskan pengertian ekosistem, komponen biotik dan abiotik, serta berikan dua contoh di lingkungan sekitar. Susun dengan poin-poin, gunakan bahasa sederhana, dan buat lima soal latihan beserta kunci jawaban di bagian terpisah.'
-      },
-      {
-        id: 3,
-        tag: 'BAB 3',
-        title: 'AI Sebagai Teman Belajar Mandiri',
-        duration: 'Hal. 8 • Alur Belajar 5 Langkah',
-        summary: 'Menerapkan alur belajar: (1) Tentukan tujuan, (2) Minta penjelasan bertahap, (3) Uji pemahaman kuis tanpa catatan, (4) Periksa dengan buku/guru, dan (5) Refleksi.',
-        prompt: 'Jadilah tutor pribadi saya untuk mata pelajaran/mata kuliah [NAMA]. Topik yang ingin saya pelajari adalah [TOPIK]. Tanyakan terlebih dahulu apa yang sudah saya ketahui. Setelah itu jelaskan materi secara bertahap, berikan contoh, lalu uji pemahaman saya dengan lima pertanyaan. Jangan berikan jawaban kuis sebelum saya mencoba.'
-      },
-      {
-        id: 4,
-        tag: 'BAB 4',
-        title: 'Membantu Tugas, Esai, dan Makalah',
-        duration: 'Hal. 9–10 • Penulisan Akademik Bertanggung Jawab',
-        summary: 'Menggunakan AI untuk menyusun kerangka tulisan dan meninjau tata bahasa/alur paragraf, sementara gagasan utama, kutipan asli, dan tanggung jawab tetap pada penulis.',
-        prompt: 'Saya mendapat tugas esai tentang [TOPIK] untuk mata pelajaran/mata kuliah [NAMA]. Bantu saya membuat kerangka yang terdiri dari pendahuluan, tiga gagasan utama, pembahasan, dan kesimpulan. Ajukan pertanyaan agar saya dapat memasukkan pendapat dan contoh sendiri. Jangan membuat kutipan atau daftar pustaka fiktif.'
-      },
-      {
-        id: 5,
-        tag: 'BAB 5',
-        title: 'Riset, Karya Ilmiah, dan Berpikir Kritis',
-        duration: 'Hal. 11–12 • Pemetaan Topik & Prinsip Verifikasi',
-        summary: 'Memetakan pertanyaan penelitian awal, menyusun kata kunci jurnal, dan menguji kekuatan argumen tanpa memalsukan data maupun referensi.',
-        prompt: 'Saya mahasiswa/pelajar bidang [BIDANG]. Saya tertarik pada topik [TOPIK]. Bantu saya menyusun lima kemungkinan pertanyaan penelitian yang realistis untuk tingkat pendidikan saya. Untuk setiap pertanyaan, jelaskan fokus, data yang mungkin dibutuhkan, dan keterbatasannya. Jangan mengarang hasil penelitian atau sumber.'
-      },
-      {
-        id: 6,
-        tag: 'BAB 6',
-        title: 'Presentasi, Poster, dan Infografis',
-        duration: 'Hal. 13 • Komunikasi Visual Edukatif',
-        summary: 'Mengubah materi pelajaran menjadi alur presentasi 5–7 slide atau konsep poster edukasi yang ringkas, visual, dan mencantumkan sumber resmi.',
-        prompt: 'Bantu saya menyusun presentasi 7 slide tentang [TOPIK] untuk audiens [SISWA/MAHASISWA/GURU/DOSEN]. Buat judul tiap slide, maksimal empat poin singkat, saran visual, dan catatan pembicara. Gunakan bahasa yang mudah dipahami. Tandai data yang perlu saya verifikasi.'
-      },
-      {
-        id: 7,
-        tag: 'BAB 7',
-        title: 'Membuat Video Edukasi dengan AI',
-        duration: 'Hal. 14 • Alur Produksi 6 Tahap',
-        summary: 'Merancang ide, naskah, storyboard, produksi, penyuntingan, dan pemeriksaan fakta/lisensi untuk video edukasi berdurasi 30–60 detik.',
-        prompt: 'Buat naskah video edukasi 30 detik tentang [TOPIK] untuk [SISWA/MAHASISWA]. Bagi menjadi tiga adegan. Setiap adegan berisi deskripsi visual, narasi/dialog, dan teks singkat di layar. Gunakan bahasa ringan, akurat, dan ajakan belajar di akhir.'
-      },
-      {
-        id: 8,
-        tag: 'BAB 8',
-        title: 'AI untuk Organisasi, Kreativitas, dan Karier',
-        duration: 'Hal. 15 • OSIS, BEM, UKM & Persiapan Karier',
-        summary: 'Menyusun proposal kegiatan organisasi, kalender publikasi, latihan wawancara kerja, serta rencana belajar keterampilan karier 8 minggu tanpa membocorkan data sensitif.',
-        prompt: 'Bertindaklah sebagai pendamping organisasi pelajar/mahasiswa. Bantu kami menyusun rancangan kegiatan [NAMA KEGIATAN] dengan tujuan, sasaran peserta, tahapan, kebutuhan, jadwal, pembagian tugas, dan evaluasi. Beri tanda pada informasi yang masih perlu kami tentukan.'
-      },
-      {
-        id: 9,
-        tag: 'BAB 9',
-        title: 'Etika, Keamanan, dan Integritas Akademik',
-        duration: 'Hal. 16–17 • Prinsip Jujur, Kritis, Aman & Bertanggung Jawab',
-        summary: 'Menjaga kerahasiaan password/OTP/data pribadi, menghormati hak cipta dan privasi orang lain, serta mematuhi aturan pengungkapan penggunaan AI di sekolah/kampus.',
-        prompt: 'Bantu saya membuat pernyataan pengungkapan penggunaan AI (AI Disclosure) yang jujur untuk tugas sekolah/kuliah. Jelaskan bahwa saya memakai AI untuk brainstorming kerangka dan pengecekan ejaan, sedangkan analisis dan sumber data saya verifikasi secara mandiri.'
-      },
-      {
-        id: 10,
-        tag: 'BAB 10',
-        title: 'Proyek Akhir dan Portofolio Karya',
-        duration: 'Hal. 18–21 • Pilihan Proyek A–E & Rubrik Penilaian',
-        summary: 'Membuat satu proyek utama (Paket Belajar, Presentasi, Poster, Video Edukasi, atau Proyek Organisasi) disertai satu halaman refleksi proses belajar dan verifikasi fakta.',
-        prompt: 'Bantu saya menyusun kerangka laporan refleksi 1 halaman untuk proyek akhir [JUDUL PROYEK] yang mencakup: tujuan proyek, proses pengerjaan, bantuan AI yang digunakan, cara verifikasi fakta, dan pelajaran utama yang saya peroleh.'
-      }
-    ];
-
-    // Data Soal Kuis Evaluasi
-    const quizData = [
-      {
-        q: '1. Komponen apa saja yang membuat instruksi (prompt) kepada AI menghasilkan jawaban lebih akurat?',
+        q: '1. Apa kepanjangan rumus penyusunan perintah AI efektif R-C-T-F?',
         options: [
-          'Hanya mengetik satu kata kunci singkat tanpa konteks',
-          'Menentukan Peran, Konteks, Tugas spesifik, dan Format keluaran',
-          'Mengulang kalimat yang sama berkali-kali'
-        ],
-        answer: 1
-      },
-      {
-        q: '2. Bagaimana sikap paling etis bagi pelajar/mahasiswa saat memakai AI untuk tugas sekolah?',
-        options: [
-          'Menyalin mentah seluruh hasil AI tanpa membaca ulang',
-          'Menggunakan AI sebagai rekan diskusi/brainstorming lalu memverifikasi dan menyusun ulang dengan pemahaman sendiri',
-          'Mengakui gambar buatan AI sebagai lukisan tangan manual'
-        ],
-        answer: 1
-      },
-      {
-        q: '3. Elemen utama di bagian atas halaman website (Hero Section) yang baik sebaiknya berisi...',
-        options: [
-          'Judul utama yang jelas, manfaat program/produk, dan tombol aksi (CTA)',
-          'Hanya daftar syarat dan ketentuan yang sangat panjang',
-          'Pop-up iklan yang menutupi seluruh layar'
+          'Role, Context, Task, Format',
+          'Read, Copy, Type, Finish',
+          'Random, Code, Text, File',
+          'Result, Check, Target, Flow'
         ],
         answer: 0
       },
       {
-        q: '4. Dalam strategi Digital Marketing konten pendek, fungsi utama "Hook" di 3 detik pertama adalah...',
+        q: '2. Mengapa memberikan konteks (Context) saat berinteraksi dengan AI sangat penting?',
         options: [
-          'Menutup video secepat mungkin',
-          'Menarik perhatian audiens agar berhenti menggulir (scroll) dan menyimak pesan',
-          'Menampilkan nomor rekening bank'
+          'Agar AI membutuhkan waktu lebih lama untuk memproses',
+          'Agar AI memahami latar belakang, target audiens, dan batasan jawaban secara akurat',
+          'Supaya jawaban AI selalu berbentuk gambar',
+          'Untuk menghapus riwayat percakapan sebelumnya'
         ],
         answer: 1
       },
       {
-        q: '5. Langkah awal paling realistis untuk mulai berwirausaha digital sejak pelajar/mahasiswa adalah...',
+        q: '3. Bagian paling atas pada halaman landing page website yang memuat judul utama dan tombol ajakan bertindak disebut...',
         options: [
-          'Menunggu modal ratusan juta rupiah terlebih dahulu',
-          'Menawarkan solusi keterampilan digital sederhana (seperti landing page/konten) untuk kebutuhan UMKM atau acara sekitar',
-          'Membuat produk tanpa mencari tahu kebutuhan pengguna'
+          'Footer Section',
+          'Sidebar Widget',
+          'Hero Section',
+          'Cookie Banner'
+        ],
+        answer: 2
+      },
+      {
+        q: '4. Dalam strategi Digital Marketing, apa kepanjangan dari formula copywriting AIDA?',
+        options: [
+          'Action, Idea, Data, Analysis',
+          'Attention, Interest, Desire, Action',
+          'Audience, Internet, Digital, Ads',
+          'Article, Image, Design, Audio'
         ],
         answer: 1
+      },
+      {
+        q: '5. Apa fungsi utama Call-to-Action (CTA) pada konten promosi digital?',
+        options: [
+          'Membuat desain terlihat penuh tulisan',
+          'Mengarahkan audiens melakukan langkah nyata seperti klik tombol atau menghubungi WhatsApp',
+          'Menyembunyikan harga produk dari pembeli',
+          'Mengganti nama domain website secara otomatis'
+        ],
+        answer: 1
+      },
+      {
+        q: '6. Sikap paling tepat dan etis saat menggunakan AI untuk mengerjakan tugas sekolah atau proyek klien adalah...',
+        options: [
+          'Menyalin mentah hasil AI tanpa membaca maupun memeriksa kebenaran faktanya',
+          'Menjadikan AI sebagai asisten brainstorming lalu memverifikasi dan menyunting hasilnya',
+          'Mengakui seluruh karya orang lain sebagai buatan sendiri',
+          'Menghindari penggunaan teknologi digital sama sekali'
+        ],
+        answer: 1
+      },
+      {
+        q: '7. Manakah yang termasuk peluang wirausaha digital yang dapat dimulai oleh pelajar/mahasiswa?',
+        options: [
+          'Jasa pembuatan landing page UMKM & pengelolaan konten media sosial berbasis AI',
+          'Membeli server fisik berukuran raksasa di kamar tidur',
+          'Menunggu lulus kuliah S3 baru mulai belajar internet',
+          'Menjual akun pribadi secara ilegal'
+        ],
+        answer: 0
+      },
+      {
+        q: '8. Apa tujuan utama desain web yang bersifat "Mobile-First / Responsive"?',
+        options: [
+          'Agar website hanya bisa dibuka melalui komputer kantor',
+          'Agar tampilan website tetap rapi, terbaca jelas, dan nyaman diakses melalui layar smartphone',
+          'Agar ukuran file gambar menjadi sangat berat',
+          'Menghilangkan semua tombol navigasi'
+        ],
+        answer: 1
+      },
+      {
+        q: '9. Apa yang dimaksud dengan "halusinasi AI" pada model bahasa generatif?',
+        options: [
+          'AI menghasilkan informasi yang terdengar meyakinkan tetapi faktanya keliru atau tidak akurat',
+          'Layar monitor berkedip saat membuka browser',
+          'Komputer kehabisan baterai saat mengetik',
+          'AI menolak menjawab pertanyaan matematika'
+        ],
+        answer: 0
+      },
+      {
+        q: '10. Berapa syarat nilai minimum pada Evaluasi Go To School untuk mengakses e-Sertifikat online?',
+        options: [
+          'Nilai 60',
+          'Nilai 75',
+          'Nilai 85',
+          'Nilai 100 (Sempurna)'
+        ],
+        answer: 3
+      },
+      {
+        q: '11. Apa fungsi utama nama domain (contoh: latifsafruddin.online) pada sebuah website?',
+        options: [
+          'Sebagai alamat unik agar pengunjung mudah menemukan website di internet',
+          'Sebagai alat pendingin prosesor komputer',
+          'Untuk menghapus cache pada browser',
+          'Sebagai pengganti baterai laptop'
+        ],
+        answer: 0
+      },
+      {
+        q: '12. Teknik mengoptimalkan konten website agar mudah muncul di halaman pertama mesin pencari Google disebut...',
+        options: [
+          'SEO (Search Engine Optimization)',
+          'BIOS (Basic Input Output System)',
+          'LAN (Local Area Network)',
+          'USB (Universal Serial Bus)'
+        ],
+        answer: 0
+      },
+      {
+        q: '13. Dalam pembuatan konten media sosial, apa yang dimaksud dengan "Hook" pada 3 detik pertama video atau baris awal caption?',
+        options: [
+          'Penutup video yang berisi daftar pustaka',
+          'Kalimat atau visual pancingan yang menarik perhatian audiens agar tidak melakukan scroll',
+          'Pengaturan kecerahan layar ponsel',
+          'Nomor seri perangkat keras kamera'
+        ],
+        answer: 1
+      },
+      {
+        q: '14. Data sensitif apa yang TIDAK BOLEH dibagikan secara sembarangan ke platform AI publik?',
+        options: [
+          'Ide judul artikel blog',
+          'Password akun, PIN perbankan, dan NIK/data rahasia pribadi',
+          'Rekomendasi warna desain poster',
+          'Contoh kerangka presentasi sekolah'
+        ],
+        answer: 1
+      },
+      {
+        q: '15. Apa manfaat utama pemanfaatan AI dan digital marketing bagi pelaku UMKM lokal?',
+        options: [
+          'Memperluas jangkauan pasar, mempercepat produksi konten promosi, dan meningkatkan efisiensi biaya',
+          'Menutup seluruh toko fisik tanpa komunikasi dengan pelanggan',
+          'Menghentikan pencatatan keuangan usaha',
+          'Membatasi pembeli hanya dari satu lingkungan RT saja'
+        ],
+        answer: 0
       }
     ];
 
-    // ==================== FUNGSI UI & NAVIGASI ====================
-    function toggleTheme() {
-      appState.theme = appState.theme === 'dark' ? 'light' : 'dark';
-      document.body.classList.toggle('light-theme', appState.theme === 'light');
-      const btn = document.getElementById('theme-toggle-btn');
-      if (btn) {
-        btn.textContent = appState.theme === 'light' ? '🌙 Gelap' : '☀️ Terang';
+    // ==================== INITIALIZATION ====================
+    document.addEventListener('DOMContentLoaded', () => {
+      loadState();
+      renderQuizQuestions();
+      renderStudentList();
+      updateCertificateUI();
+      updateMouPreview();
+      if (appState.theme === 'light') {
+        document.body.classList.add('light-theme');
+        document.getElementById('theme-toggle-btn').textContent = '🌙 Gelap';
       }
-      showToast(
-        appState.theme === 'light' ? 'Mode Terang Aktif' : 'Mode Gelap Aktif',
-        appState.theme === 'light' ? 'Tampilan beralih ke tema terang yang bersih.' : 'Tampilan beralih ke tema gelap biru-emas.'
-      );
+    });
+
+    function loadState() {
+      try {
+        const saved = localStorage.getItem(STORAGE_KEY);
+        if (saved) {
+          appState = { ...appState, ...JSON.parse(saved) };
+        }
+      } catch (e) {
+        console.warn('Gagal memuat localStorage:', e);
+      }
     }
 
-    function setLanguage(lang) {
-      appState.lang = lang;
-      const btnId = document.getElementById('btn-lang-id');
-      const btnEn = document.getElementById('btn-lang-en');
-      if (btnId && btnEn) {
-        btnId.className = lang === 'id'
-          ? 'rounded-xl bg-brand-electric px-3.5 py-1.5 text-xs font-extrabold text-white transition'
-          : 'rounded-xl px-3.5 py-1.5 text-xs font-bold text-slate-400 hover:text-white transition';
-        btnEn.className = lang === 'en'
-          ? 'rounded-xl bg-brand-electric px-3.5 py-1.5 text-xs font-extrabold text-white transition'
-          : 'rounded-xl px-3.5 py-1.5 text-xs font-bold text-slate-400 hover:text-white transition';
+    function saveState() {
+      try {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(appState));
+      } catch (e) {
+        console.warn('Gagal menyimpan localStorage:', e);
       }
-      renderTestimonials();
     }
+
+    // ==================== TOAST NOTIFICATION ====================
+    let toastTimer = null;
+    function showToast(title, msg, icon = '✓') {
+      const box = document.getElementById('toast-box');
+      document.getElementById('toast-title').textContent = title;
+      document.getElementById('toast-msg').textContent = msg;
+      document.getElementById('toast-icon').textContent = icon;
+      box.classList.remove('hidden');
+      clearTimeout(toastTimer);
+      toastTimer = setTimeout(() => {
+        box.classList.add('hidden');
+      }, 3600);
+    }
+
+    // ==================== NAVIGATION TABS ====================
+    function switchTab(tabName) {
+      document.querySelectorAll('.tab-panel').forEach(el => el.classList.add('hidden'));
+      const target = document.getElementById('tab-' + tabName);
+      if (target) target.classList.remove('hidden');
+
+      document.querySelectorAll('.nav-btn').forEach(btn => {
+        if (btn.dataset.tab === tabName) {
+          btn.classList.add('bg-brand-electric', 'text-white', 'shadow-md', 'shadow-blue-600/30');
+          btn.classList.remove('text-slate-300');
+        } else {
+          btn.classList.remove('bg-brand-electric', 'text-white', 'shadow-md', 'shadow-blue-600/30');
+          btn.classList.add('text-slate-300');
+        }
+      });
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    // ==================== THEME & LANGUAGE ====================
+    function toggleTheme() {
+      const isLight = document.body.classList.toggle('light-theme');
+      appState.theme = isLight ? 'light' : 'dark';
+      document.getElementById('theme-toggle-btn').textContent = isLight ? '🌙 Gelap' : '☀️ Terang';
+      saveState();
+      showToast('Tema Diperbarui', isLight ? 'Mode Terang aktif.' : 'Mode Gelap aktif.', isLight ? '☀️' : '🌙');
+    }
+
+    const i18nDict = {
+      id: {
+        nav_home: 'Beranda',
+        nav_mou: 'Surat Kerja Sama',
+        nav_eval: 'Evaluasi Pilihan Ganda',
+        nav_cert: 'Sertifikat',
+        hero_badge: 'BERSAMA MEMBANGUN GENERASI DIGITAL INDONESIA',
+        hero_sub: 'Edukasi Digital untuk Masa Depan yang Lebih Baik',
+        what_we_bring: 'Apa yang Kami Bawa?',
+        cta_mou: 'Buat Surat Kerja Sama Sekolah',
+        cta_modules: 'Daftar Peserta & Evaluasi'
+      },
+      en: {
+        nav_home: 'Home',
+        nav_mou: 'Partnership MoU',
+        nav_eval: 'Multiple Choice Exam',
+        nav_cert: 'Certificate',
+        hero_badge: 'BUILDING INDONESIA’S DIGITAL GENERATION TOGETHER',
+        hero_sub: 'Digital Education for a Better Future',
+        what_we_bring: 'What Do We Bring?',
+        cta_mou: 'Generate School MoU Letter',
+        cta_modules: 'Register & Start Evaluation'
+      }
+    };
 
     function toggleLanguage() {
-      setLanguage(appState.lang === 'id' ? 'en' : 'id');
-      showToast(
-        appState.lang === 'id' ? 'Bahasa Indonesia' : 'English Language',
-        appState.lang === 'id' ? 'Kesaksian ditampilkan dalam Bahasa Indonesia.' : 'Testimonials switched to English.'
-      );
+      appState.lang = appState.lang === 'id' ? 'en' : 'id';
+      const dict = i18nDict[appState.lang];
+      document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.dataset.i18n;
+        if (dict[key]) el.textContent = dict[key];
+      });
+      saveState();
+      showToast('Bahasa / Language', appState.lang === 'id' ? 'Bahasa Indonesia dipilih.' : 'English language selected.', '🌐');
     }
 
-    function renderTestimonials() {
-      const lang = appState.lang;
-      const badge = document.getElementById('testi-badge');
-      const heading = document.getElementById('testi-heading');
-      const subheading = document.getElementById('testi-subheading');
-      const grid = document.getElementById('testimonials-grid');
-
-      if (badge) {
-        badge.textContent = lang === 'id' ? 'Suara Peserta & Mitra Sekolah' : 'Participant & Partner Voices';
-      }
-      if (heading) {
-        heading.textContent = lang === 'id'
-          ? '4 Kesaksian Nyata Pelatihan Go To School'
-          : '4 Real Testimonials from Go To School Training';
-      }
-      if (subheading) {
-        subheading.textContent = lang === 'id'
-          ? 'Pengalaman siswa, mahasiswa, dan guru pendamping setelah mengikuti workshop bersama PT Web Digital Marketing & Latifsafruddin AI.'
-          : 'Experiences from students, undergraduates, and educators after joining workshops with PT Web Digital Marketing & Latifsafruddin AI.';
-      }
-
-      if (grid) {
-        grid.innerHTML = testimonialsData.map(item => `
-          <article class="flex flex-col justify-between rounded-2xl border border-white/10 bg-slate-950/80 p-5 space-y-4 hover:border-brand-cyan/50 transition">
-            <div class="space-y-3">
-              <div class="flex items-center justify-between gap-2">
-                <span class="rounded-lg bg-brand-blue/80 px-2.5 py-1 text-[10px] font-extrabold text-brand-gold">
-                  ${item.tag[lang]}
-                </span>
-                <span class="text-xs text-brand-gold" aria-label="5 bintang">★★★★★</span>
-              </div>
-              <p class="text-xs sm:text-sm text-slate-200 italic leading-relaxed">
-                ${item.quote[lang]}
-              </p>
-            </div>
-            <div class="flex items-center gap-3 border-t border-white/10 pt-3">
-              <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-brand-gold/50 bg-brand-blue text-xs font-black text-brand-gold">
-                ${item.initials}
-              </div>
-              <div class="min-w-0">
-                <p class="truncate text-xs sm:text-sm font-extrabold text-white">${item.name}</p>
-                <p class="text-[11px] text-slate-400 leading-snug">${item.role[lang]}</p>
-              </div>
-            </div>
-          </article>
-        `).join('');
-      }
-    }
-
+    // ==================== FLYER UPLOAD & MODAL ====================
     function handleFlyerUpload(event) {
       const file = event.target.files && event.target.files[0];
       if (!file) return;
       const reader = new FileReader();
       reader.onload = function(e) {
-        const customImg = document.getElementById('flyer-custom-img');
+        const img = document.getElementById('flyer-custom-img');
         const defaultPoster = document.getElementById('flyer-default-poster');
-        customImg.src = e.target.result;
-        customImg.classList.remove('hidden');
+        img.src = e.target.result;
+        img.classList.remove('hidden');
         defaultPoster.classList.add('hidden');
-        showToast('Flyer Diperbarui', 'Gambar flyer resmi berhasil ditampilkan di halaman utama.');
+        showToast('Flyer Diperbarui', 'Gambar flyer kustom berhasil dimuat.');
       };
       reader.readAsDataURL(file);
     }
 
     function toggleFlyerModal(show) {
       const modal = document.getElementById('flyer-modal');
-      const modalBody = document.getElementById('flyer-modal-body');
       if (show) {
-        const customImg = document.getElementById('flyer-custom-img');
-        const defaultPoster = document.getElementById('flyer-default-poster');
-        if (!customImg.classList.contains('hidden') && customImg.src) {
-          modalBody.innerHTML = `<img src="${customImg.src}" alt="Flyer Go To School" class="w-full h-auto rounded-2xl" />`;
-        } else {
-          modalBody.innerHTML = defaultPoster.outerHTML;
-        }
         modal.classList.remove('hidden');
         modal.classList.add('flex');
       } else {
@@ -1563,301 +1155,293 @@
       }
     }
 
-    function showToast(title, msg) {
-      const box = document.getElementById('toast-box');
-      document.getElementById('toast-title').textContent = title;
-      document.getElementById('toast-msg').textContent = msg;
-      box.classList.remove('hidden');
-      clearTimeout(window.toastTimer);
-      window.toastTimer = setTimeout(() => {
-        box.classList.add('hidden');
-      }, 3600);
+    // ==================== STUDENT REGISTRATION ====================
+    function registerStudent(event) {
+      event.preventDefault();
+      const nama = document.getElementById('reg-nama').value.trim();
+      const absen = document.getElementById('reg-absen').value.trim();
+      const kelas = document.getElementById('reg-kelas').value.trim();
+      const sekolah = document.getElementById('reg-sekolah').value.trim();
+      const hp = document.getElementById('reg-hp').value.trim();
+      const medsos = document.getElementById('reg-medsos').value.trim();
+
+      if (!nama || !sekolah) return;
+
+      const student = { nama, absen, kelas, sekolah, hp, medsos, registeredAt: new Date().toLocaleDateString('id-ID') };
+      appState.students.push(student);
+      appState.activeStudentIndex = appState.students.length - 1;
+      saveState();
+
+      // Sinkron ke tab Evaluasi & Sertifikat
+      document.getElementById('eval-nama').value = nama;
+      document.getElementById('eval-kelas-absen').value = `Absen ${absen} - ${kelas}`;
+      document.getElementById('eval-sekolah').value = sekolah;
+
+      document.getElementById('student-reg-form').reset();
+      renderStudentList();
+      updateCertificateUI();
+      showToast('Pendaftaran Berhasil', `${nama} terdaftar. Silakan lanjut kerjakan evaluasi.`);
+      switchTab('evaluasi');
     }
 
-    function switchTab(tabName) {
-      document.querySelectorAll('.tab-panel').forEach(panel => {
-        panel.classList.add('hidden');
-      });
-      const target = document.getElementById('tab-' + tabName);
-      if (target) target.classList.remove('hidden');
-
-      document.querySelectorAll('.nav-btn').forEach(btn => {
-        if (btn.dataset.tab === tabName) {
-          btn.className = 'nav-btn rounded-xl px-3 py-2 text-xs sm:text-sm font-semibold transition bg-brand-electric text-white shadow-md shadow-blue-600/30';
-        } else {
-          btn.className = 'nav-btn rounded-xl px-3 py-2 text-xs sm:text-sm font-semibold text-slate-300 hover:bg-white/10 hover:text-white transition';
-        }
-      });
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
-
-    // ==================== GENERATOR SURAT KERJA SAMA ====================
-    function switchLetterType(type) {
-      const penawaran = document.getElementById('letter-penawaran');
-      const kerjasama = document.getElementById('letter-kerjasama');
-      const btnPenawaran = document.getElementById('btn-doc-penawaran');
-      const btnKerjasama = document.getElementById('btn-doc-kerjasama');
-
-      if (type === 'penawaran') {
-        penawaran.classList.remove('hidden');
-        kerjasama.classList.add('hidden');
-        btnPenawaran.className = 'rounded-xl bg-brand-electric px-4 py-2 text-xs sm:text-sm font-bold text-white shadow transition';
-        btnKerjasama.className = 'rounded-xl border border-white/15 bg-slate-900 px-4 py-2 text-xs sm:text-sm font-bold text-slate-300 hover:text-white transition';
-      } else {
-        penawaran.classList.add('hidden');
-        kerjasama.classList.remove('hidden');
-        btnKerjasama.className = 'rounded-xl bg-brand-electric px-4 py-2 text-xs sm:text-sm font-bold text-white shadow transition';
-        btnPenawaran.className = 'rounded-xl border border-white/15 bg-slate-900 px-4 py-2 text-xs sm:text-sm font-bold text-slate-300 hover:text-white transition';
+    function selectActiveStudent(index) {
+      appState.activeStudentIndex = index;
+      const s = appState.students[index];
+      if (s) {
+        document.getElementById('eval-nama').value = s.nama;
+        document.getElementById('eval-kelas-absen').value = `Absen ${s.absen} - ${s.kelas}`;
+        document.getElementById('eval-sekolah').value = s.sekolah;
+        saveState();
+        renderStudentList();
+        updateCertificateUI();
+        showToast('Peserta Aktif Dipilih', `${s.nama} (${s.sekolah})`);
       }
     }
 
-    function updateMoU() {
+    function renderStudentList() {
+      const badge = document.getElementById('student-count-badge');
+      const wrapper = document.getElementById('registered-students-wrapper');
+      const list = document.getElementById('registered-students-list');
+      badge.textContent = `${appState.students.length} Siswa Terdaftar`;
+
+      if (appState.students.length === 0) {
+        wrapper.classList.add('hidden');
+        return;
+      }
+
+      wrapper.classList.remove('hidden');
+      list.innerHTML = appState.students.map((s, idx) => {
+        const isActive = idx === appState.activeStudentIndex;
+        return `
+          <button type="button" onclick="selectActiveStudent(${idx})" class="text-left rounded-2xl border p-3.5 transition ${isActive ? 'border-brand-gold bg-brand-gold/10' : 'border-white/10 bg-slate-950/80 hover:border-brand-cyan/40'}">
+            <div class="flex items-center justify-between gap-2">
+              <p class="font-bold text-sm text-white truncate">${escapeHtml(s.nama)}</p>
+              ${isActive ? '<span class="rounded-full bg-brand-gold px-2 py-0.5 text-[10px] font-black text-slate-950">AKTIF</span>' : ''}
+            </div>
+            <p class="text-xs text-brand-cyan mt-0.5 truncate">Absen ${escapeHtml(s.absen)} • ${escapeHtml(s.kelas)} • ${escapeHtml(s.sekolah)}</p>
+            <p class="text-[11px] text-slate-400 mt-1">HP: ${escapeHtml(s.hp)} | Medsos: ${escapeHtml(s.medsos)}</p>
+          </button>
+        `;
+      }).join('');
+
+      if (appState.activeStudentIndex >= 0 && appState.students[appState.activeStudentIndex]) {
+        const active = appState.students[appState.activeStudentIndex];
+        if (!document.getElementById('eval-nama').value) {
+          document.getElementById('eval-nama').value = active.nama;
+        }
+        if (!document.getElementById('eval-kelas-absen').value) {
+          document.getElementById('eval-kelas-absen').value = `Absen ${active.absen} - ${active.kelas}`;
+        }
+        if (!document.getElementById('eval-sekolah').value) {
+          document.getElementById('eval-sekolah').value = active.sekolah;
+        }
+      }
+    }
+
+    // ==================== MoU GENERATOR ====================
+    function updateMouPreview() {
       const nomor = document.getElementById('mou-nomor').value || '-';
       const sekolah = document.getElementById('mou-sekolah').value || '-';
-      const alamat = document.getElementById('mou-alamat').value || '-';
       const kepsek = document.getElementById('mou-kepsek').value || '-';
-      const jabatan = document.getElementById('mou-jabatan').value || '-';
-      const tanggal = document.getElementById('mou-tanggal').value || '-';
+      const jabatan = document.getElementById('mou-jabatan').value || 'Kepala Sekolah';
+      const alamat = document.getElementById('mou-alamat').value || '-';
+      const tglRaw = document.getElementById('mou-tanggal').value;
       const peserta = document.getElementById('mou-peserta').value || '-';
-      const paket = document.getElementById('mou-paket').value || '-';
+      const fokus = document.getElementById('mou-fokus').value || '-';
 
-      document.getElementById('prev-nomor').textContent = nomor;
-      document.getElementById('prev-nomor-2').textContent = nomor;
-      document.getElementById('prev-sekolah').textContent = sekolah;
-      document.getElementById('prev-sekolah-2').textContent = sekolah;
-      document.getElementById('prev-sekolah-inline').textContent = sekolah;
-      document.getElementById('prev-alamat').textContent = alamat;
-      document.getElementById('prev-kepsek').textContent = kepsek;
-      document.getElementById('prev-kepsek-ttd').textContent = kepsek;
-      document.getElementById('prev-jabatan-ttd').textContent = jabatan;
-      document.getElementById('prev-tanggal').textContent = tanggal;
-      document.getElementById('prev-tanggal-2').textContent = tanggal;
-      document.getElementById('prev-peserta').textContent = peserta;
-      document.getElementById('prev-paket').textContent = paket;
+      let formattedDate = tglRaw;
+      if (tglRaw) {
+        const d = new Date(tglRaw + 'T00:00:00');
+        formattedDate = d.toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' });
+      }
 
-      const certKepsek = document.getElementById('cert-kepsek-name');
-      if (certKepsek) certKepsek.textContent = kepsek;
+      document.getElementById('prev-mou-nomor').textContent = nomor;
+      document.getElementById('prev-mou-sekolah-inline').textContent = sekolah;
+      document.getElementById('prev-mou-sekolah').textContent = sekolah;
+      document.getElementById('prev-mou-sekolah-ttd').textContent = sekolah;
+      document.getElementById('prev-mou-kepsek').textContent = kepsek;
+      document.getElementById('prev-mou-kepsek-ttd').textContent = kepsek;
+      document.getElementById('prev-mou-jabatan').textContent = jabatan;
+      document.getElementById('prev-mou-jabatan-ttd').textContent = jabatan;
+      document.getElementById('prev-mou-alamat').textContent = alamat;
+      document.getElementById('prev-mou-tanggal').textContent = formattedDate;
+      document.getElementById('prev-mou-peserta').textContent = peserta;
+      document.getElementById('prev-mou-fokus').textContent = fokus;
     }
 
-    function copyTextFallback(text) {
-      const temp = document.createElement('textarea');
-      temp.value = text;
-      document.body.appendChild(temp);
-      temp.select();
-      document.execCommand('copy');
-      document.body.removeChild(temp);
-    }
-
-    function copyMoUText() {
-      const docEl = document.getElementById('mou-document');
-      copyTextFallback(docEl.innerText);
-      showToast('Teks Surat Disalin', 'Draf Perjanjian Kerja Sama siap ditempel ke Word atau WhatsApp.');
-    }
-
-    function submitPartnershipRequest() {
-      const sekolah = document.getElementById('mou-sekolah').value;
-      const tanggal = document.getElementById('mou-tanggal').value;
-      showToast('Pengajuan Kemitraan Terkirim', `Jadwal untuk ${sekolah} (${tanggal}) masuk antrean verifikasi tim.`);
-    }
-
-    function printSection(elementId) {
-      const source = document.getElementById(elementId);
-      const printArea = document.getElementById('print-area');
-      printArea.innerHTML = source.outerHTML;
-      printArea.classList.remove('hidden');
-      window.print();
-      printArea.classList.add('hidden');
-      printArea.innerHTML = '';
-    }
-
-    // ==================== MODUL & PROMPT BANK ====================
-    function switchModulSubTab(sub) {
-      ['bab', 'rumus', 'lembarkerja', 'rundown'].forEach(key => {
-        const panel = document.getElementById('subpanel-' + key);
-        const btn = document.getElementById('subbtn-' + key);
-        if (panel) panel.classList.toggle('hidden', key !== sub);
-        if (btn) {
-          btn.className = key === sub
-            ? 'rounded-xl bg-brand-electric px-4 py-2 text-xs font-bold text-white transition'
-            : 'rounded-xl border border-white/15 bg-slate-950/60 px-4 py-2 text-xs font-bold text-slate-300 hover:text-white transition';
-        }
+    function copyMouText() {
+      const text = document.getElementById('mou-print-doc').innerText;
+      navigator.clipboard.writeText(text).then(() => {
+        showToast('Draf Surat Disalin', 'Teks Surat Perjanjian Kerja Sama siap ditempel.');
+      }).catch(() => {
+        showToast('Info', 'Silakan gunakan tombol Cetak / Simpan PDF.', 'ℹ️');
       });
     }
 
-    function saveWorksheet() {
-      showToast('Lembar Kerja Tersimpan', 'Catatan eksperimen prompt dan rencana belajar pribadi berhasil disimpan.');
-    }
+    // ==================== EVALUATION QUIZ ====================
+    function renderQuizQuestions() {
+      const container = document.getElementById('quiz-questions-container');
+      container.innerHTML = quizQuestions.map((item, qIdx) => {
+        const optionsHtml = item.options.map((opt, oIdx) => `
+          <label class="flex items-start gap-3 rounded-xl border border-white/10 bg-slate-950/70 p-3 cursor-pointer hover:border-brand-cyan/50 transition">
+            <input type="radio" name="q_${qIdx}" value="${oIdx}" class="mt-0.5 accent-brand-gold" />
+            <span class="text-xs sm:text-sm text-slate-200">${escapeHtml(opt)}</span>
+          </label>
+        `).join('');
 
-    function renderModules() {
-      const grid = document.getElementById('subpanel-bab');
-      grid.innerHTML = modulesData.map(mod => {
-        const isDone = appState.completedModules.includes(mod.id);
         return `
-          <div class="rounded-3xl border ${isDone ? 'border-brand-cyan/50' : 'border-white/10'} bg-slate-900 p-6 flex flex-col justify-between space-y-4">
-            <div class="space-y-3">
-              <div class="flex items-center justify-between gap-2">
-                <span class="rounded-lg bg-brand-blue px-2.5 py-1 text-xs font-extrabold text-brand-gold">${mod.tag}</span>
-                <span class="text-xs text-slate-400">${mod.duration}</span>
-              </div>
-              <h3 class="text-lg font-extrabold text-white">${mod.title}</h3>
-              <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">${mod.summary}</p>
-
-              <div class="rounded-2xl border border-white/10 bg-slate-950 p-3.5 space-y-2">
-                <div class="flex items-center justify-between">
-                  <span class="text-[11px] font-bold uppercase text-brand-cyan">Prompt Praktik Resmi</span>
-                  <button onclick="copyPrompt(${mod.id})" class="rounded-lg bg-white/10 px-2.5 py-1 text-[11px] font-bold text-white hover:bg-brand-electric transition">
-                    Salin Prompt
-                  </button>
-                </div>
-                <p class="text-xs text-slate-300 italic">"${mod.prompt}"</p>
-              </div>
-            </div>
-
-            <button onclick="toggleModule(${mod.id})" class="w-full rounded-xl py-2.5 text-xs sm:text-sm font-bold transition ${isDone ? 'bg-emerald-500/20 text-emerald-300 border border-emerald-500/40' : 'bg-brand-electric text-white hover:bg-blue-500'}">
-              ${isDone ? '✓ Selesai Dipelajari' : 'Tandai Bab Selesai'}
-            </button>
+          <div id="q-card-${qIdx}" class="rounded-3xl border border-white/10 bg-slate-900/90 p-5 sm:p-6 space-y-3">
+            <p class="font-bold text-sm sm:text-base text-white">${escapeHtml(item.q)}</p>
+            <div class="grid gap-2 sm:grid-cols-2">${optionsHtml}</div>
           </div>
         `;
       }).join('');
 
-      const pct = Math.round((appState.completedModules.length / modulesData.length) * 100);
-      document.getElementById('modul-progress-text').textContent = `${pct}% (${appState.completedModules.length}/${modulesData.length} Bab)`;
-      document.getElementById('modul-progress-bar').style.width = `${pct}%`;
-    }
-
-    function copyPrompt(id) {
-      const mod = modulesData.find(m => m.id === id);
-      if (mod) {
-        copyTextFallback(mod.prompt);
-        showToast('Prompt Disalin', `Template prompt ${mod.tag} siap digunakan di ChatGPT/AI.`);
+      if (appState.bestScore !== null) {
+        document.getElementById('eval-best-score').textContent = `${appState.bestScore} / 100`;
       }
     }
 
-    function toggleModule(id) {
-      if (appState.completedModules.includes(id)) {
-        appState.completedModules = appState.completedModules.filter(item => item !== id);
-      } else {
-        appState.completedModules.push(id);
-        showToast('Progres Diperbarui', `Bab ${id} ditandai selesai dipelajari.`);
+    function submitEvaluation(event) {
+      event.preventDefault();
+      const nama = document.getElementById('eval-nama').value.trim();
+      const sekolah = document.getElementById('eval-sekolah').value.trim();
+
+      if (!nama || !sekolah) {
+        showToast('Data Belum Lengkap', 'Harap isi Nama Lengkap dan Asal Sekolah sebelum mengirim evaluasi.', '⚠️');
+        document.getElementById('eval-nama').focus();
+        return;
       }
-      renderModules();
-    }
 
-    // ==================== EVALUASI & TUGAS ====================
-    function renderQuiz() {
-      const container = document.getElementById('quiz-questions');
-      container.innerHTML = quizData.map((item, idx) => `
-        <div class="rounded-2xl border border-white/10 bg-slate-950/80 p-4 space-y-2.5">
-          <p class="text-sm font-bold text-white">${item.q}</p>
-          <div class="space-y-2">
-            ${item.options.map((opt, optIdx) => `
-              <label class="flex items-start gap-2.5 rounded-xl border border-white/5 bg-slate-900/90 p-2.5 text-xs sm:text-sm text-slate-200 cursor-pointer hover:border-brand-cyan/40">
-                <input type="radio" name="q_${idx}" value="${optIdx}" required class="mt-1 accent-brand-cyan" />
-                <span>${opt}</span>
-              </label>
-            `).join('')}
-          </div>
-        </div>
-      `).join('');
-    }
+      let correctCount = 0;
+      let unanswered = 0;
 
-    function submitQuiz(e) {
-      e.preventDefault();
-      let correct = 0;
-      quizData.forEach((item, idx) => {
+      quizQuestions.forEach((item, idx) => {
         const selected = document.querySelector(`input[name="q_${idx}"]:checked`);
-        if (selected && Number(selected.value) === item.answer) {
-          correct++;
+        const card = document.getElementById(`q-card-${idx}`);
+        card.classList.remove('border-emerald-500/60', 'border-rose-500/60');
+
+        if (!selected) {
+          unanswered++;
+          card.classList.add('border-rose-500/60');
+        } else if (parseInt(selected.value, 10) === item.answer) {
+          correctCount++;
+          card.classList.add('border-emerald-500/60');
+        } else {
+          card.classList.add('border-rose-500/60');
         }
       });
 
-      const score = Math.round((correct / quizData.length) * 100);
-      appState.quizScore = score;
-      appState.quizPassed = score >= 80;
-
-      const badge = document.getElementById('quiz-badge');
-      if (appState.quizPassed) {
-        badge.className = 'rounded-xl bg-emerald-500/20 border border-emerald-500/40 px-3 py-1.5 text-xs font-bold text-emerald-300';
-        badge.textContent = `Lulus • Skor ${score}/100`;
-        showToast('Evaluasi Lulus!', `Skor kamu ${score}/100. Pastikan tugas praktik juga sudah dikumpulkan.`);
-      } else {
-        badge.className = 'rounded-xl bg-amber-500/20 border border-amber-500/40 px-3 py-1.5 text-xs font-bold text-amber-300';
-        badge.textContent = `Skor ${score}/100 (Ulangi)`;
-        showToast('Skor Belum Mencukupi', `Skor kamu ${score}/100. Minimal lulus adalah 80, silakan coba lagi.`);
+      if (unanswered > 0) {
+        showToast('Masih Ada Soal Kosong', `Silakan jawab semua soal (${unanswered} soal belum dipilih).`, '⚠️');
+        return;
       }
-      updateCertificateState();
-    }
 
-    function submitTask(e) {
-      e.preventDefault();
-      appState.participantName = document.getElementById('participant-name').value.trim();
-      appState.participantSchool = document.getElementById('participant-school').value.trim();
-      appState.taskSubmitted = true;
+      const score = Math.round((correctCount / quizQuestions.length) * 100);
+      if (appState.bestScore === null || score > appState.bestScore) {
+        appState.bestScore = score;
+      }
+      saveState();
 
-      const badge = document.getElementById('task-badge');
-      badge.className = 'rounded-xl bg-emerald-500/20 border border-emerald-500/40 px-3 py-1 text-xs font-bold text-emerald-300';
-      badge.textContent = '✓ Terkumpul';
+      document.getElementById('eval-best-score').textContent = `${appState.bestScore} / 100`;
+      const banner = document.getElementById('eval-result-banner');
+      banner.classList.remove('hidden');
 
-      document.getElementById('cert-holder-name').textContent = appState.participantName;
-      document.getElementById('cert-holder-school').textContent = appState.participantSchool;
-
-      showToast('Tugas Berhasil Dikumpulkan', 'Tautan karya & refleksi AI tersimpan di portofolio peserta.');
-      updateCertificateState();
-    }
-
-    // ==================== SERTIFIKAT & VERIFIKASI ====================
-    function updateCertificateState() {
-      const unlocked = appState.quizPassed && appState.taskSubmitted;
-      const overlay = document.getElementById('cert-lock-overlay');
-      const btnPrint = document.getElementById('btn-print-cert');
-      const statusDesc = document.getElementById('cert-status-desc');
-
-      if (unlocked) {
-        overlay.classList.add('hidden');
-        btnPrint.disabled = false;
-        statusDesc.innerHTML = `Selamat <strong class="text-brand-gold">${appState.participantName}</strong>! Sertifikat resmi telah aktif dan siap diunduh.`;
+      if (score === 100) {
+        banner.className = 'rounded-3xl border-2 border-brand-gold bg-gradient-to-r from-blue-950 via-indigo-950 to-slate-900 p-6 text-center space-y-3 shadow-2xl';
+        banner.innerHTML = `
+          <div class="text-3xl sm:text-4xl">
+            <span class="clap-anim">👏</span> <span class="star-anim">⭐</span> <span class="clap-anim">👏</span> <span class="star-anim">🌟</span> <span class="clap-anim">👏</span>
+          </div>
+          <h3 class="text-xl sm:text-2xl font-black text-brand-gold">LUAR BIASA! NILAI ANDA 100 / 100</h3>
+          <p class="text-sm text-slate-200">Selamat <strong>${escapeHtml(nama)}</strong>! Anda menjawab semua ${quizQuestions.length} soal dengan benar. Sertifikat online Anda kini telah terbuka.</p>
+          <button type="button" onclick="switchTab('sertifikat')" class="rounded-2xl bg-brand-gold px-6 py-2.5 text-sm font-black text-slate-950 hover:brightness-105 transition">
+            Akses &amp; Cetak Sertifikat Online Sekarang →
+          </button>
+        `;
+        showToast('Selamat! Nilai 100 Tercapai', 'Tepuk tangan & bintang untuk Anda! Sertifikat online terbuka.', '⭐');
       } else {
-        overlay.classList.remove('hidden');
-        btnPrint.disabled = true;
+        banner.className = 'rounded-3xl border-2 border-rose-500/50 bg-rose-950/30 p-6 text-center space-y-2';
+        banner.innerHTML = `
+          <h3 class="text-xl font-black text-white">Nilai Anda: ${score} / 100 (${correctCount} dari ${quizQuestions.length} Benar)</h3>
+          <p class="text-sm text-slate-300">Kartu soal berwarna merah menandakan jawaban yang masih keliru. Silakan perbaiki jawaban Anda hingga mencapai <strong>Nilai 100</strong> agar bisa mengakses sertifikat online.</p>
+        `;
+        showToast(`Skor Anda: ${score}`, 'Perbaiki soal bertanda merah untuk meraih Nilai 100.', '📝');
+      }
+
+      updateCertificateUI();
+      banner.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+
+    function resetQuiz() {
+      document.getElementById('quiz-form').reset();
+      document.getElementById('eval-result-banner').classList.add('hidden');
+      quizQuestions.forEach((_, idx) => {
+        const card = document.getElementById(`q-card-${idx}`);
+        card.classList.remove('border-emerald-500/60', 'border-rose-500/60');
+      });
+      showToast('Kuis Direset', 'Semua pilihan jawaban telah dibersihkan.');
+    }
+
+    // ==================== CERTIFICATE ====================
+    function updateCertificateUI() {
+      const locked = document.getElementById('cert-locked-state');
+      const unlocked = document.getElementById('cert-unlocked-state');
+      const printBtn = document.getElementById('btn-print-cert');
+
+      const activeStudent = appState.activeStudentIndex >= 0 ? appState.students[appState.activeStudentIndex] : null;
+      const nama = document.getElementById('eval-nama').value.trim() ||
+                   activeStudent?.nama ||
+                   'Peserta Go To School';
+      const kelasAbsen = document.getElementById('eval-kelas-absen').value.trim() ||
+                         (activeStudent ? `Absen ${activeStudent.absen} - ${activeStudent.kelas}` : 'Peserta Pelatihan Digital');
+      const sekolah = document.getElementById('eval-sekolah').value.trim() ||
+                      activeStudent?.sekolah ||
+                      'Mitra Sekolah / Kampus Indonesia';
+
+      if (appState.bestScore === 100) {
+        locked.classList.add('hidden');
+        unlocked.classList.remove('hidden');
+        printBtn.disabled = false;
+
+        document.getElementById('cert-student-name').textContent = nama;
+        document.getElementById('cert-student-class').textContent = kelasAbsen;
+        document.getElementById('cert-student-school').textContent = sekolah;
+        document.getElementById('cert-serial').textContent = appState.certSerial;
+        document.getElementById('cert-issue-date').textContent = new Date().toLocaleDateString('id-ID', {
+          day: 'numeric', month: 'long', year: 'numeric'
+        });
+      } else {
+        locked.classList.remove('hidden');
+        unlocked.classList.add('hidden');
+        printBtn.disabled = true;
       }
     }
 
-    function demoUnlockCert() {
-      appState.quizPassed = true;
-      appState.quizScore = 100;
-      appState.taskSubmitted = true;
-
-      const nameInput = document.getElementById('participant-name').value.trim();
-      const schoolInput = document.getElementById('participant-school').value.trim();
-      if (nameInput) appState.participantName = nameInput;
-      if (schoolInput) appState.participantSchool = schoolInput;
-
-      document.getElementById('cert-holder-name').textContent = appState.participantName;
-      document.getElementById('cert-holder-school').textContent = appState.participantSchool;
-      updateCertificateState();
-      showToast('Mode Demo Aktif', 'Pratinjau sertifikat dibuka untuk simulasi tampilan.');
-    }
-
-    function verifyCertificate() {
-      const val = document.getElementById('verify-input').value.trim().toUpperCase();
-      const res = document.getElementById('verify-result');
-      if (val === appState.certNumber) {
-        res.className = 'mt-2.5 text-xs font-semibold text-emerald-400';
-        res.textContent = `✓ VALID: Terdaftar atas nama ${appState.participantName} (${appState.participantSchool}) — Program Go To School PT Web Digital Marketing & Latifsafruddin AI.`;
-      } else {
-        res.className = 'mt-2.5 text-xs font-semibold text-amber-400';
-        res.textContent = 'Nomor registrasi tidak ditemukan. Gunakan contoh: GTS-2026-88412';
+    // ==================== PRINT & UTILS ====================
+    function printElement(targetId) {
+      const existingPrintArea = document.getElementById('print-area');
+      if (existingPrintArea && targetId !== 'print-area') {
+        existingPrintArea.id = 'cert-print-box';
       }
+      const target = document.getElementById(targetId);
+      if (!target) return;
+      const prevId = target.id;
+      target.id = 'print-area';
+      window.print();
+      target.id = prevId;
+      const certBox = document.getElementById('cert-print-box');
+      if (certBox) certBox.id = 'print-area';
     }
 
-    // Inisialisasi Halaman
-    window.addEventListener('DOMContentLoaded', () => {
-      updateMoU();
-      renderModules();
-      renderQuiz();
-      updateCertificateState();
-      renderTestimonials();
-    });
+    function escapeHtml(str) {
+      return String(str)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#039;');
+    }
   </script>
 </body>
 </html>
